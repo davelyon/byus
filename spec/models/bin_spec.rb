@@ -7,13 +7,7 @@ describe Bin do
 
   describe "validation" do
     it { should validate_presence_of :title }
-  end
-
-  describe "creation" do
-    context "when created from a new link" do
-      subject { Fabricate(:link).bin }
-      its(:title) { should_not be_nil }
-    end
+    it { should_not allow_mass_assignment_of :secret_hash }
   end
 
 end

@@ -1,2 +1,9 @@
 %h1.page_title
   = bin.title
+%h2.secret_url
+  You must copy this link to return to this page!
+  .secret= link_to bin_url(bin.secret_hash)
+-unless bin.links.empty?
+  .links
+    =render bin.links 
+

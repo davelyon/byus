@@ -11,7 +11,7 @@ module NavigationHelpers
     when /the home\s?page/
       '/'
     when /the bin show page/
-      bin_path Bin.first
+      bin_path Bin.first.secret_hash
 
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:

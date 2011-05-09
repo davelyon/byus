@@ -1,3 +1,3 @@
 Fabricator(:bin) do
-  name "MyString"
+  title "http://reddit.com/r/ruby"
 end

@@ -10,12 +10,13 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110506212131) do
+ActiveRecord::Schema.define(:version => 20110509180617) do
 
   create_table "bins", :force => true do |t|
     t.string   "title"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "secret_hash"
   end
 
   create_table "links", :force => true do |t|

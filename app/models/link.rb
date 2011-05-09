@@ -3,11 +3,15 @@ class Link < ActiveRecord::Base
 
   validates :location, presence: true
 
-  after_create :attach_bin
+  after_initialize :attach_bin
 
   private
 
   def attach_bin
-    self.bin ||= Bin.create!(title: self.location)
+    if bin.nil?
+      create_bin(title: self.location)
+      bin.links << self
+    end
   end
+
 end

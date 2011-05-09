@@ -14,8 +14,17 @@ describe Link do
       subject { Fabricate(:link) }
       its(:bin) { should_not be_nil }
       it "should set the bin title to link location" do
+        subject.reload
         subject.bin.title.should == subject.location
       end
     end
   end
+
+  describe "#attach_bin" do
+    context "when creating a link without a bin" do
+      subject { Fabricate.build(:link) }
+      its(:bin) { should_not be_nil }
+    end
+  end
+
 end
