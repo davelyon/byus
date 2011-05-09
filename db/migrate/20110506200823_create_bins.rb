@@ -1,7 +1,7 @@
 class CreateBins < ActiveRecord::Migration
   def self.up
     create_table :bins do |t|
-      t.string :theme
+      t.string :title
 
       t.timestamps
     end

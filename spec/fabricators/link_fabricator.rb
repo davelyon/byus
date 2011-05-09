@@ -1,4 +1,3 @@
 Fabricator(:link) do
-  location "MyString"
-  bin_id 1
+  location "http://reddit.com/r/ruby"
 end

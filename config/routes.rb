@@ -1,6 +1,10 @@
 Byus::Application.routes.draw do
-  resources :bins
 
-  root to: 'bins#new'
+  get "pages/landing"
+
+  resources :bins
+  resources :links
+
+  root to: 'pages#landing'
 
 end
