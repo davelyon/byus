@@ -4,7 +4,8 @@ gem 'rails', '3.0.7'
 gem 'mysql2', '~> 0.2.7'
 gem 'decent_exposure'
 gem 'haml-rails'
-gem 'sass'
+gem 'compass'
+gem 'html5-boilerplate'
 
 group :development, :test do
   gem 'capybara'
