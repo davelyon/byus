@@ -1,0 +1,70 @@
+#container {
+  margin: 0 auto;
+  width: 760px;
+}
+
+h1.page_title {
+  font-size: larger;
+  display: block;
+  background-color: #3C6;
+  padding: 5px;
+  margin-bottom: 10px;
+}
+
+.secret_link {
+  font-size: large;
+  display: block
+  width: 100%;
+  background-color: #eee;
+  margin: 30px 0;
+}
+
+.new_link_form {
+  margin-bottom: 50px;
+}
+
+.new_link_form input {
+  font-size: larger;
+}
+
+.new_link_form label{
+  font-size: 20px;
+}
+
+ul.links {
+  list-style-type: none;
+}
+
+ul.links li{
+  font-size: 18px;
+}
+
+.bin_link_light {
+  background-color: #ddd;
+}
+
+.bin_link_dark {
+  background-color: #aaa;
+}
+
+ul.links a:link {
+  color: #000;
+}
+
+ul.links a:visited {
+  color: #777;
+}
+
+ul.links a.delete {
+  float: right;
+}
+
+#flash div{
+  padding: 12px;
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+#flash div.success {
+  background-color: #0C3;
+}

@@ -1,14 +1,16 @@
 %h1.page_title
+  Current Bin:
   = bin.title
-%h2.secret_url
-  You must copy this link to return to this page!
-  .secret= link_to bin_url(bin.secret_hash)
-%h2.add_link
+.secret_link
+  You must copy this link to return to this page:
+  = link_to "Your Secret URL",bin_url(bin.secret_hash)
+.new_link_form
   =form_for link do |f|
+    = f.label :location, "Add a Link:"
     = f.text_field :location
     = f.hidden_field :secret_hash
     = f.submit "Add"
 -unless bin.links.empty?
-  .links
+  %ul.links
     =render bin.links 
 
