@@ -4,18 +4,17 @@ class Bin < ActiveRecord::Base
 
   attr_accessible :title
 
-  validates :title, presence: true
+  validates_presence_of :secret_hash, :title
 
-  before_validation :check_title, :create_hash
+  before_validation :generate_hash, unless: :secret_hash
+
+  def to_param
+    secret_hash
+  end
 
   private
 
-  def check_title
-    self.title ||= title
-  end
-
-  def create_hash
+  def generate_hash
     self.secret_hash = Digest::SHA2.hexdigest("#{title}--#{Time.now}")
   end
-
 end

@@ -5,12 +5,10 @@
   You must copy this link to return to this page:
   = link_to "Your Secret URL",bin_url(bin.secret_hash)
 .new_link_form
-  =form_for link do |f|
+  = form_for [bin, link] do |f|
     = f.label :location, "Add a Link:"
     = f.text_field :location
-    = f.hidden_field :secret_hash
     = f.submit "Add"
 -unless bin.links.empty?
   %ul.links
-    =render bin.links 
-
+    =render bin.links

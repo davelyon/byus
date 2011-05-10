@@ -1,0 +1,7 @@
+%h1.page_title
+  Create a new bin
+.new_link_form
+  = form_for link do |f|
+    = f.label :location, "Enter a URL"
+    = f.text_field :location
+    = f.submit "Create"

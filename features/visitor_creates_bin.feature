@@ -6,7 +6,7 @@ I want to create a bin
 
   Scenario: Success
     Given I am on the home page
-    When I fill in "link_location" with "http://hashrocket.com/"
+    When I fill in "Enter a URL" with "http://hashrocket.com/"
     And I press "Create"
     Then I should be on the bin show page
     And I should see "http://hashrocket.com/" within "h1.page_title"

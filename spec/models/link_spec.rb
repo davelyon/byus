@@ -6,6 +6,8 @@ describe Link do
   end
 
   describe "validation" do
+    before { subject.stub(:attach_bin) }
+    it { should validate_presence_of(:bin) }
     it { should validate_presence_of(:location) }
   end
 

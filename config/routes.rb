@@ -1,15 +1,10 @@
 Byus::Application.routes.draw do
-
   get "pages/landing"
 
-  resources :bins, only: [:create] do
-    resources :links, only: [:destroy]
+  resources :bins, only: [:create, :show] do
+    resources :links, only: [:create, :destroy]
   end
+  resources :links, only: [:new, :create]
 
-  match 'bins/:secret_hash', to: 'bins#show', as: 'bin'
-
-  resources :links, only: [:create]
-
-  root to: 'pages#landing'
-
+  root to: 'links#new'
 end

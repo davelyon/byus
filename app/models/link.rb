@@ -1,7 +1,7 @@
 class Link < ActiveRecord::Base
   belongs_to :bin
 
-  validates :location, presence: true
+  validates_presence_of :bin, :location
 
   before_validation :attach_bin
 
@@ -12,10 +12,6 @@ class Link < ActiveRecord::Base
   private
 
   def attach_bin
-    if self.bin.nil?
-      create_bin(title: self.location)
-      self.bin.links << self
-    end
+    self.bin = create_bin(title: location) unless bin.present?
   end
-
 end
