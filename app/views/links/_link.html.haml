@@ -1,1 +1,3 @@
-%li.bin_link= link_to link.location,link.location
+%li.bin_link
+  = link_to link.location,link.location
+  = link_to "[delete]", bin_link_path(link.secret_hash,link.id), method: :delete

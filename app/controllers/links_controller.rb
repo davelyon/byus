@@ -1,10 +1,15 @@
 class LinksController < ApplicationController
   expose(:bin_link) do
+    location = params[:link][:location]
+    secret = params[:link][:secret_hash]
     bin = Bin.find_by_secret_hash(secret)
     bin ? bin.links.new(location: location) : nil
   end
 
-  expose(:link) { bin_link || Link.new(location: location) }
+  expose(:link) do
+    location = params[:link][:location]
+    bin_link || Link.new(location: location)
+  end
 
   def create
     if link.save
@@ -16,22 +21,15 @@ class LinksController < ApplicationController
     end
   end
 
-  protected
-
-  def location
-    params[:link][:location]
+  def destroy
+    Link.find_by_id(params[:id]).destroy
+    flash[:success] = "Link deleted"
+    redirect_to bin_path(params[:bin_id])
   end
 
-  def secret
-    params[:link][:secret_hash]
-  end
-
+  private
   def redirect_back_or_landing
+    secret = params[:link][:secret_hash]
     redirect_to ( secret.nil? ? root_path : bin_path(secret) )
-    # if secret.nil?
-      # redirect_to root_path
-    # else
-      # redirect_to bin_path(secret)
-    # end
   end
 end
