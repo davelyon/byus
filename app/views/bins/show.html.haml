@@ -4,6 +4,7 @@
 .secret_link
   You must copy this link to return to this page:
   = link_to "Your Secret URL",bin_url(bin.secret_hash)
+  = render 'bookmarklet'
 .new_link_form
   = form_for [bin, link] do |f|
     = f.text_field :location, { value: "Enter a URL" }

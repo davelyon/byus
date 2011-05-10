@@ -1,0 +1,5 @@
+javascript:function bsv(){
+  var d=document,z=d.createElement('scr'+'ipt'),b=d.body,l=d.location;
+  try{if(!b)throw(0);d.title='(Saving...)'+d.title;
+  z.setAttribute('src',l.protocol+'//localhost:3000/bins/7e4762d62b7a837a70c708ccf59634727c9907e5665e62a1c094e8a3e1ad7044?u='+encodeURIComponent(l.href));
+  b.appendChild(z);}catch(e){alert('Wait for page to load!');}}bsv();void(0)"> Bookmarklet </a>

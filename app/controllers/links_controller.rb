@@ -12,7 +12,11 @@ class LinksController < ApplicationController
   def create
     if link.save
       flash[:success] = "Link Added"
-      redirect_to bin_path link.bin.secret_hash
+      if request.get?
+        render 'bins/_bookmarklet_response'
+      else
+        redirect_to bin_path link.bin.secret_hash
+      end
     else
       flash[:error] = "Unable to add link"
       redirect_back_or_landing

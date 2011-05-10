@@ -1,0 +1,16 @@
+foo = function(){
+  var d = document;
+  var z = d.createElement('div');
+  d.title = d.title.replace('(Saving...)', '')
+  z.innerHTML = "<p id='byus_link_saver' style='position: absolute; top:0px; left:0px; font-size: 32px; color: #000;'> Link Saved <p>";
+  var i = d.getElementsByTagName("body");
+  d.body.insertBefore(z, i.nextSibling);
+}()
+
+foo2 = function() {
+  var s = document.getElementById('byus_link_saver');
+  s.style.display = 'none';
+  s.parentNode.removeChild(s);
+}
+
+setTimeout(foo2, 3000);
