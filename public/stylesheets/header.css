@@ -1,0 +1,8 @@
+#header {
+  margin-bottom: 2em;
+}
+h1.site_title {
+  color: blue;
+  font-weight: bold;
+  font-size: larger;
+}
