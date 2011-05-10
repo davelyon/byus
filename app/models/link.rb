@@ -3,14 +3,18 @@ class Link < ActiveRecord::Base
 
   validates :location, presence: true
 
-  after_initialize :attach_bin
+  before_validation :attach_bin
+
+  def secret_hash
+    bin.secret_hash
+  end
 
   private
 
   def attach_bin
-    if bin.nil?
+    if self.bin.nil?
       create_bin(title: self.location)
-      bin.links << self
+      self.bin.links << self
     end
   end
 

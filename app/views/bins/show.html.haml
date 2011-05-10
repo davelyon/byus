@@ -3,6 +3,11 @@
 %h2.secret_url
   You must copy this link to return to this page!
   .secret= link_to bin_url(bin.secret_hash)
+%h2.add_link
+  =form_for link do |f|
+    = f.text_field :location
+    = f.hidden_field :secret_hash
+    = f.submit "Add"
 -unless bin.links.empty?
   .links
     =render bin.links 
