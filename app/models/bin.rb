@@ -1,6 +1,6 @@
 require 'digest/sha2'
 class Bin < ActiveRecord::Base
-  has_many :links
+  has_many :links, order: 'created_at DESC'
 
   attr_accessible :title
 
