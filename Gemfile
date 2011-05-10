@@ -1,7 +1,7 @@
 source 'http://rubygems.org'
 
 gem 'rails', '3.0.7'
-gem 'mysql2', '~> 0.2.7'
+gem 'pg'
 gem 'decent_exposure'
 gem 'haml-rails'
 gem 'compass'
@@ -20,4 +20,5 @@ group :development, :test do
   gem 'ruby-debug19', :require => 'ruby-debug'
   gem 'shoulda'
   gem 'watchr'
+  gem 'sqlite3'
 end

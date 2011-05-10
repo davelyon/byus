@@ -12,8 +12,8 @@ Feature: Visitor views bin
       | http://google.com/           |
       | http://news.ycombinator.com/ |
     When I am on the bin show page
-    Then I should see the bin hash within ".secret > a"
-    And I should see "You must copy this link to return to this page!"
+    Then I should see the bin hash
+    And I should see "You must copy this link to return to this page:"
     And I should see "http://reddit.com/" within ".links"
     And I should see "http://google.com/" within ".links"
     And I should see "http://news.ycombinator.com/" within ".links"
