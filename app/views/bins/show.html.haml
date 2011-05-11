@@ -1,6 +1,10 @@
 %h1.page_title
   Current Bin:
   = bin.title
+  = form_for bin do |f|
+    = f.label :title, "Change Bin Title:"
+    = f.text_field :title
+    = f.submit "Change Title"
 .secret_link
   You must copy this link to return to this page:
   = link_to "Your Secret URL",bin_url(bin.secret_hash)
