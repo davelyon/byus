@@ -3,6 +3,8 @@ class Link < ActiveRecord::Base
 
   validates_presence_of :bin, :location
 
+  validates_format_of :location , with: URI::regexp
+
   before_validation :attach_bin
 
   def secret_hash

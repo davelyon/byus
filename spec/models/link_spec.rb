@@ -11,6 +11,48 @@ describe Link do
     it { should validate_presence_of(:location) }
   end
 
+  describe "location" do
+    subject { Fabricate.build(:link) }
+    context "when valid" do
+      let(:http) { "http://reddit.com/" }
+      let(:https) { "https://facebook.com/"}
+      let(:other) { "http://www3.google.com/a/b"}
+      it "should allow http links" do
+        subject.location = http
+        subject.should be_valid
+      end
+
+      it "should allow https links" do
+        subject.location = https
+        subject.should be_valid
+      end
+
+      it "should allow other links" do
+        subject.location = other
+        subject.should be_valid
+      end
+    end
+    context "when invalid" do
+      let(:no_protocol) { "dave" }
+      let(:slashes) { "//foo/bar"}
+      let(:colons) { ":foo/:bar_/foo"}
+      it "should not allow words" do
+        subject.location = no_protocol
+        subject.should_not be_valid
+      end
+
+      it "should not allow links with slashes but no protocol" do
+        subject.location = slashes
+        subject.should_not be_valid
+      end
+
+      it "should not allow links with colons and slashes but no protocol" do
+        subject.location = colons
+        subject.should_not be_valid
+      end
+    end
+  end
+
   describe "creation" do
     context "when created without bin" do
       subject { Fabricate(:link) }
