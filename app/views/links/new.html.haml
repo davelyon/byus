@@ -2,6 +2,5 @@
   Create a new bin
 .new_link_form
   = form_for link do |f|
-    = f.label :location, "Enter a URL"
-    = f.text_field :location
+    = f.text_field :location, {value: "Enter a URL"}
     = f.submit "Create"

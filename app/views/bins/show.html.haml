@@ -6,8 +6,7 @@
   = link_to "Your Secret URL",bin_url(bin.secret_hash)
 .new_link_form
   = form_for [bin, link] do |f|
-    = f.label :location, "Add a Link:"
-    = f.text_field :location
+    = f.text_field :location, { value: "Enter a URL" }
     = f.submit "Add"
 -unless bin.links.empty?
   %ul.links

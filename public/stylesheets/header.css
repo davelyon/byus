@@ -2,8 +2,16 @@
   margin-bottom: 2em;
 }
 
-h1.site_title a {
-  color: blue;
+h1.site_title a{
+  color: #06C;
   font-weight: bold;
   font-size: larger;
+}
+
+#header_navigation {
+  float:right;
+}
+
+#header_navigation a {
+  margin: 0 8px;
 }
