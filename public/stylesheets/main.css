@@ -78,6 +78,10 @@ ul.links a.delete {
   float: right;
 }
 
+ul.links a.long_link {
+  font-size: smaller;
+}
+
 #flash div{
   padding: 12px;
   margin-bottom: 10px;
