@@ -60,6 +60,22 @@ describe Link do
         subject.bin.title.should == subject.location
       end
     end
+    context "created with a bin" do
+      let(:bin) { Fabricate(:bin) }
+      let(:bin2) { Fabricate(:bin) }
+      let(:link) { Fabricate.attributes_for(:link) }
+      before { bin.links.create!(link) }
+      context "when creating duplicate in same bin" do
+        it "should not save duplicate link" do
+          bin.links.new(link).should_not be_valid
+        end
+      end
+      context "when creating duplicate in another bin" do
+        it "should save duplicate link" do
+          bin2.links.new(link).should be_valid
+        end
+      end
+    end
   end
 
   describe "#attach_bin" do

@@ -5,6 +5,8 @@ class Link < ActiveRecord::Base
 
   validates_format_of :location , with: URI::regexp
 
+  validates_uniqueness_of :location, scope: :bin_id
+
   before_validation :attach_bin
 
   def secret_hash
