@@ -7,15 +7,8 @@ class Link < ActiveRecord::Base
 
   validates_uniqueness_of :location, scope: :bin_id
 
-  before_validation :attach_bin
-
   def secret_hash
     bin.secret_hash
   end
 
-  private
-
-  def attach_bin
-    self.bin = create_bin(title: location) unless bin.present?
-  end
 end

@@ -50,8 +50,13 @@ h1.page_title {
   font-size: 35px;
 }
 
+.new_link_form label {
+  display: none;
+}
+
 ul.links {
   list-style-type: none;
+  margin: 0px;
 }
 
 ul.links li{
@@ -59,11 +64,11 @@ ul.links li{
 }
 
 .bin_link_light {
-  background-color: #ddd;
+  /* background-color: #ddd; */
 }
 
 .bin_link_dark {
-  background-color: #aaa;
+  background-color: #ddd;
 }
 
 ul.links a:link {
@@ -90,4 +95,23 @@ ul.links a.long_link {
 
 #flash div.success {
   background-color: #0C3;
+}
+
+#time_frame_selection {
+  font-size: large;
+  text-align: right;
+  margin-bottom: 20px;
+  clear: both;
+  width: 100%;
+}
+
+#time_frame_selection a{
+  color: #06C;
+  padding: 10px;
+}
+
+#time_frame_selection a.current_view {
+  background-color: #06C;
+  color: #FFF;
+  font-weight: bold;
 }

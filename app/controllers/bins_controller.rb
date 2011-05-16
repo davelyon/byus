@@ -1,9 +1,20 @@
 class BinsController < ApplicationController
-  expose(:bin) { Bin.find_by_secret_hash(params[:id]) }
+  expose(:bin) do
+    Bin.find_by_secret_hash(params[:id]) || Bin.new(params[:bin])
+  end
   expose(:link) { bin.links.new }
   expose(:links) do
     time = params[:time].nil? ? 24 : [params[:time].to_i, 168].min
-    bin.links.where("created_at >= ?", time.hours.ago)
+    bin.links.where("updated_at >= ?", time.hours.ago)
+  end
+
+  def create
+    if bin.save
+      redirect_to bin
+    else
+      flash.now[:error] = "Unable to create a new bin"
+      render 'new'
+    end
   end
 
   def update

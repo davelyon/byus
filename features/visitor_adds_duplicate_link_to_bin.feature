@@ -2,7 +2,8 @@ Feature: Visitor adds duplicate link to bin
 
   In order to more easily view my links
   As a visitor on the bin show page
-  I want to not see duplicated links
+  I want to push duplicated links to the top of the page
+  And I do not want actual duplication
 
   Background:
     Given 1 bin
@@ -14,7 +15,7 @@ Feature: Visitor adds duplicate link to bin
 
   Scenario: Success
     When I am on the bin show page
-    And I fill in "link[location]" with "http://reddit.com/"
+    And I fill in "Location" with "http://google.com/"
     And I press "Add"
-    Then I should see "Unable to add link" within "#flash > .error"
-    And I should see the link "http://reddit.com/" 1 time
+    Then I should see "http://google.com/" in link position 1
+    And I should see the link "http://google.com/" 1 time
