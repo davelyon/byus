@@ -1,6 +1,8 @@
-%h1
+%h1.page_title
   Create a new bin
-=form_for link do |f|
-  =f.label :location, "Create a new bin"
-  =f.text_field :location
-  =f.submit "Create"
+.new_link_form
+  = form_for bin do |f|
+    = f.fields_for :links, bin.links.build do |link|
+      = link.label :location
+      = link.text_field :location, {value: "Enter a URL"}
+    = f.submit "Create"

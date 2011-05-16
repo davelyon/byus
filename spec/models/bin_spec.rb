@@ -29,6 +29,12 @@ describe Bin do
             bin.run_callbacks(:validation)
           end
         end
+        context "without a title" do
+          it "generates a title" do
+            bin.should_receive(:generate_title)
+            bin.run_callbacks(:validation)
+          end
+        end
       end
     end
   end

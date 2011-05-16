@@ -1,12 +1,14 @@
 require 'digest/sha1'
 class Bin < ActiveRecord::Base
-  has_many :links, order: 'created_at DESC'
+  has_many :links, order: 'links.updated_at DESC', inverse_of: :bin
 
-  attr_accessible :title
+  attr_accessible :title, :links_attributes
+  accepts_nested_attributes_for :links
 
   validates_presence_of :secret_hash, :title
 
   before_validation :generate_hash, unless: :secret_hash
+  before_validation :generate_title
 
   def to_param
     secret_hash
@@ -16,5 +18,9 @@ class Bin < ActiveRecord::Base
 
   def generate_hash
     self.secret_hash = Digest::SHA1.hexdigest("#{title}--#{Time.now}")
+  end
+
+  def generate_title
+    self.title ||= links.first.try(:location)
   end
 end

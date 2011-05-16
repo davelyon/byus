@@ -1,11 +1,11 @@
 class LinksController < ApplicationController
   expose(:bin) { Bin.find_by_secret_hash params[:bin_id] }
+  expose(:links) { bin.links }
   expose(:link) do
-    if bin
-      bin.links.find_by_id(params[:id]) ||
-        bin.links.new(params[:link])
+    if params[:id]
+      links.find(params[:id])
     else
-      Link.new(params[:link])
+      links.find_or_create_by_location(params[:link][:location])
     end
   end
 
