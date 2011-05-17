@@ -6,6 +6,7 @@ gem 'decent_exposure'
 gem 'haml-rails'
 gem 'compass'
 gem 'html5-boilerplate'
+gem 'dynamic_form'
 
 group :development, :test do
   gem 'capybara'

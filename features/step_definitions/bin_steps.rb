@@ -7,6 +7,6 @@ And /^the bin should have that link$/ do
 end
 
 Then /^I should see "([^"]*)" in link position (\d+)$/ do |link, position|
-  node = page.find(".links a:nth-child(#{position})")
+  node = page.find(".links li:nth-child(#{position}) a:nth-child(1)")
   node[:href].should == link
 end

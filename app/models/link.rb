@@ -3,7 +3,7 @@ class Link < ActiveRecord::Base
 
   validates_presence_of :bin, :location
 
-  validates_format_of :location , with: URI::regexp
+  validates_format_of :location , with: URI::regexp, message: "should be like http://example.com/"
 
   validates_uniqueness_of :location, scope: :bin_id
 

@@ -1,16 +1,10 @@
 class BinsController < ApplicationController
-  expose(:bin) do
-    Bin.find_by_secret_hash(params[:id]) || Bin.new(params[:bin])
-  end
-  expose(:link) { bin.links.new }
-  expose(:links) do
-    time = params[:time].nil? ? 24 : [params[:time].to_i, 168].min
-    bin.links.where("updated_at >= ?", time.hours.ago)
-  end
+  expose(:bin) { Bin.find_by_secret_hash(params[:id]) || Bin.new(params[:bin]) }
+  expose(:link) { bin.links.build(params[:link]) }
 
   def create
     if bin.save
-      redirect_to bin
+      redirect_to bin_links_path(bin)
     else
       flash.now[:error] = "Unable to create a new bin"
       render 'new'
@@ -23,6 +17,6 @@ class BinsController < ApplicationController
     else
       flash[:error] = "Unable to change name!"
     end
-    redirect_to bin
+    redirect_to bin_links_path(bin)
   end
 end

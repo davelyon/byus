@@ -64,6 +64,7 @@ GEM
     database_cleaner (0.6.7)
     decent_exposure (1.0.1)
     diff-lcs (1.1.2)
+    dynamic_form (1.1.4)
     erubis (2.6.6)
       abstract (>= 1.0.0)
     fabrication (0.9.5)
@@ -168,6 +169,7 @@ DEPENDENCIES
   cucumber-rails
   database_cleaner
   decent_exposure
+  dynamic_form
   fabrication
   faker
   haml-rails

@@ -23,7 +23,6 @@ h1.page_title {
 }
 
 .new_link_form {
-  margin-bottom: 50px;
   height: 75px;
 }
 
@@ -97,6 +96,10 @@ ul.links a.long_link {
   background-color: #0C3;
 }
 
+#flash div.error {
+  background-color: #F66;
+}
+
 #time_frame_selection {
   font-size: large;
   text-align: right;
@@ -114,4 +117,24 @@ ul.links a.long_link {
   background-color: #06C;
   color: #FFF;
   font-weight: bold;
+}
+
+.new_link_form .formError {
+  display: block;
+  width: 100%;
+  color: #000;
+  background: #F66;
+  clear: both;
+  padding: 10px 0 10px 10px;
+  font-size: larger;
+}
+
+#link_errors {
+  margin-top: 20px;
+  width: 100%;
+  color: #000;
+  background: #F66;
+  padding: 10px 0 10px 10px;
+  font-size: larger;
+  margin-bottom: 20px;
 }
