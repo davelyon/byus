@@ -17,7 +17,8 @@ class Bin < ActiveRecord::Base
   private
 
   def generate_hash
-    self.secret_hash = Digest::SHA1.hexdigest("#{title}--#{Time.now}")
+    hash = Digest::SHA1.hexdigest("#{title}--#{Time.now}")
+    self.secret_hash = id.to_i.to_s(16) + hash.slice(4..12)
   end
 
   def generate_title
