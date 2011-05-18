@@ -4,6 +4,21 @@
   = form_for bin do |f|
     = f.fields_for :links, bin.links.build do |link|
       = link.label :location
-      = link.url_field :location, {placeholder: "Enter a URL"}
-    = f.submit "Create"
+      = link.url_field :location, {placeholder: "Enter a URL", class: 'link_location'}
+    = f.submit "Create", {class: 'link_submit'}
 = error_messages_for link, id: 'link_errors'
+#explanation
+  %h2.subtitle
+    Share links with friends
+  %p
+    Do you ever find yourself sending links to your friends through email, IMs, twitter, facebook, or other methods?  Do you wish you could save time and just <em>share links with a single click?</em>
+  %h3
+    Getting started is as simple as:
+  %ul
+    %li Create a bin from any URL (that's a web address, like http://example.com)
+    %li Bookmark your bin's private URL
+    %li
+      Add your bin's bookmarklet to your address bar
+      = link_to '(Need help?)', '#'
+    %li Any time you want to add a link to your bin, just click the bookmarklet
+    %li Share your private link with people you want to share links with

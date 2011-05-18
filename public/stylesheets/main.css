@@ -3,15 +3,43 @@
   width: 760px;
 }
 
+#explanation {
+  width: 75%;
+}
+
+em {
+  font-weight: bold;
+  font-style: italic;
+}
+
 h1.page_title {
-  font-size: larger;
+  font-size: large;
   display: block;
-  /* background-color: #3C6; */
   border: 0px #06C solid;
   border-bottom-width: 3px;
   color: #06C;
   padding: 5px;
   margin-bottom: 20px;
+}
+
+h2 {
+  font-size: larger;
+  display: block;
+  border: 0px #06C solid;
+  border-bottom-width: 3px;
+  color: #06C;
+  padding: 5px;
+  margin-bottom: 20px;
+}
+
+h3 {
+  display: block;
+  color: #06C;
+  padding: 5px;
+}
+
+p {
+  margin-bottom: 1em;
 }
 
 .secret_link {
@@ -34,12 +62,12 @@ h1.page_title {
   font-size: 20px;
 }
 
-.new_link_form input#link_location{
+.new_link_form input.link_location{
   float: left;
   width: 75%;
 }
 
-.new_link_form input#link_submit{
+.new_link_form input.link_submit{
   float: right;
   width: 160px;
   height: 45px;

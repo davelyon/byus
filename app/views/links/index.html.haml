@@ -13,8 +13,8 @@
   = form_for [bin,link] do |f|
     #link_fields
       = f.label :location
-      = f.url_field :location, {placeholder: "Enter a URL"}
-      = f.submit "Add"
+      = f.url_field :location, {placeholder: "Enter a URL", class: 'link_location'}
+      = f.submit "Add", {class: 'link_submit'}
 = error_messages_for link, id: 'link_errors'
 #time_frame_selection
   Show links from the last:
