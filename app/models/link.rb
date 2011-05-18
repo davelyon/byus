@@ -7,8 +7,24 @@ class Link < ActiveRecord::Base
 
   validates_uniqueness_of :location, scope: :bin_id
 
+  before_validation :normalize_location
+
   def secret_hash
     bin.secret_hash
+  end
+
+  def self.normalize_url(url)
+    begin
+      URI.parse(url).normalize.to_s
+    rescue URI::InvalidURIError
+      url
+    end
+  end
+
+  private
+
+  def normalize_location
+    location = Link.normalize_url(location)
   end
 
 end

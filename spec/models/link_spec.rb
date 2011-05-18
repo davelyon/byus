@@ -81,4 +81,22 @@ describe Link do
     end
   end
 
+  describe "#normalized_url" do
+    subject { Link.normalize_url(url) }
+    context "with valid url" do
+      let(:url) { "http://foobear.com/" }
+      it { should == url }
+    end
+    context "without trailing slash" do
+      let(:url) { "http://foobear.com" }
+      it { should == url << "/" }
+    end
+    context "with and invalid url" do
+      let(:url) { "return invalid" }
+      it "returns invalid urls" do
+        should == url
+      end
+    end
+  end
+
 end

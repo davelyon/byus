@@ -19,3 +19,10 @@ Feature: Visitor adds duplicate link to bin
     And I press "Add"
     Then I should see "http://google.com/" in link position 1
     And I should see the link "http://google.com/" 1 time
+
+  Scenario: Near duplicate
+    When I am on the bin show page
+    And I fill in "Location" with "http://google.com"
+    And I press "Add"
+    Then I should see "http://google.com/" in link position 1
+    And I should see the link "http://google.com/" 1 time

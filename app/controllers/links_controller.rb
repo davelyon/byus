@@ -1,10 +1,9 @@
 class LinksController < ApplicationController
   expose(:bin) { Bin.find_by_secret_hash params[:bin_id] }
   expose(:link) do
-    if params[:id]
-      bin.links.find(params[:id])
-    elsif params[:link]
-      bin.links.find_by_location(params[:link][:location]) ||
+    if params[:link]
+      link = Link.normalize_url(params[:link][:location])
+      bin.links.find_by_location(link) ||
         bin.links.build(params[:link])
     else
       bin.links.build
@@ -35,7 +34,7 @@ class LinksController < ApplicationController
   end
 
   def destroy
-    link.destroy
+    bin.links.find(params[:id]).destroy
     flash[:success] = "Link deleted"
     redirect_to bin_links_path(bin)
   end
