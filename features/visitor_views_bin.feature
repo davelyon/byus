@@ -8,11 +8,11 @@ Feature: Visitor views bin
   Scenario: success
     Given 1 bin
     And that bin has the following links:
-      | location                                                                                        |
-      | http://reddit.com/                                                                              |
-      | http://google.com/                                                                              |
-      | http://news.ycombinator.com/                                                                    |
-      | http://oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo.com/foo |
+      | location                                                                         |
+      | http://reddit.com/                                                               |
+      | http://google.com/                                                               |
+      | http://news.ycombinator.com/                                                     |
+      | http://ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo.com/foo |
     When I am on the bin show page
     Then I should see the bin hash
     And I should see the bin public link
