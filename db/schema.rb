@@ -10,14 +10,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110509180617) do
+ActiveRecord::Schema.define(:version => 20110518153432) do
 
   create_table "bins", :force => true do |t|
     t.string   "title"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "secret_hash"
+    t.string   "public_hash"
   end
+
+  add_index "bins", ["secret_hash"], :name => "index_bins_on_secret_hash"
 
   create_table "links", :force => true do |t|
     t.string   "location"
