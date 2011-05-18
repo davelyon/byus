@@ -1,5 +1,13 @@
 Then /^I should see the bin hash$/ do
-  page.has_link? "Your Secret URL", href: Bin.last.secret_hash
+  page.should have_content "Your Secret URL"
+end
+
+Then /^I should not see the bin hash$/ do
+  page.should_not have_content "Your Secret URL"
+end
+
+Then /^I should see the bin public link$/ do
+  page.should have_content "Public Link"
 end
 
 And /^the bin should have that link$/ do

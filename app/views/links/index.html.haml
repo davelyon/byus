@@ -9,6 +9,7 @@
   You must copy this link to return to this page:
   = link_to "Your Secret URL",bin_url(bin.secret_hash)
   = render 'bins/bookmarklet'
+  = link_to "Public Link", public_bin_links_path(bin.public_hash)
 .new_link_form
   = form_for [bin,link] do |f|
     #link_fields

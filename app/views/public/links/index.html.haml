@@ -1,0 +1,12 @@
+%h1.page_title
+  Current Bin:
+  = bin.title
+#time_frame_selection
+  Show links from the last:
+  = link_to "24h", bin_links_path(bin,time: 24), {class: class_for_time_selection('24')}
+  = link_to "48h", bin_links_path(bin,time: 48), {class: class_for_time_selection('48')}
+  = link_to "1w" , bin_links_path(bin,time: 168), {class: class_for_time_selection('168')}
+#link_list
+  -unless links.empty?
+    %ul.links
+      =render links

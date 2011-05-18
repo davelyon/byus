@@ -5,7 +5,7 @@ class Bin < ActiveRecord::Base
   attr_accessible :title, :links_attributes
   accepts_nested_attributes_for :links
 
-  validates_presence_of :secret_hash, :title
+  validates_presence_of :secret_hash, :public_hash, :title
 
   before_validation :generate_hash, unless: :secret_hash
   before_validation :generate_title
@@ -18,7 +18,8 @@ class Bin < ActiveRecord::Base
 
   def generate_hash
     hash = Digest::SHA1.hexdigest("#{title}--#{Time.now}")
-    self.secret_hash = id.to_i.to_s(16) + hash.slice(4..12)
+    self.secret_hash ||= id.to_i.to_s(16) + hash.slice(4..12)
+    self.public_hash ||= hash.slice(12..18) + id.to_i.to_s(18)
   end
 
   def generate_title

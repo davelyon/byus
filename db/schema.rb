@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110518153432) do
+ActiveRecord::Schema.define(:version => 20110518161630) do
 
   create_table "bins", :force => true do |t|
     t.string   "title"
@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(:version => 20110518153432) do
     t.string   "public_hash"
   end
 
+  add_index "bins", ["public_hash"], :name => "index_bins_on_public_hash"
   add_index "bins", ["secret_hash"], :name => "index_bins_on_secret_hash"
 
   create_table "links", :force => true do |t|

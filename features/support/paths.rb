@@ -12,6 +12,8 @@ module NavigationHelpers
       '/'
     when /the bin show page/
       bin_links_path Bin.last.secret_hash
+    when /the public bin show page/
+      public_bin_links_path Bin.last.public_hash
 
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:

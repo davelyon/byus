@@ -8,6 +8,7 @@ describe Bin do
   describe "validation" do
     before { subject.stub(:generate_hash) }
     it { should validate_presence_of :secret_hash }
+    it { should validate_presence_of :public_hash }
     it { should validate_presence_of :title }
     it { should_not allow_mass_assignment_of :secret_hash }
   end
