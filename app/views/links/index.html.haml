@@ -13,7 +13,7 @@
   = form_for [bin,link] do |f|
     #link_fields
       = f.label :location
-      = f.text_field :location
+      = f.url_field :location, {placeholder: "Enter a URL"}
       = f.submit "Add"
 = error_messages_for link, id: 'link_errors'
 #time_frame_selection

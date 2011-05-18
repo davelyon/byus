@@ -4,6 +4,6 @@
   = form_for bin do |f|
     = f.fields_for :links, bin.links.build do |link|
       = link.label :location
-      = link.text_field :location, {value: "Enter a URL"}
+      = link.url_field :location, {placeholder: "Enter a URL"}
     = f.submit "Create"
 = error_messages_for link, id: 'link_errors'
