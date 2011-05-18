@@ -7,6 +7,7 @@ gem 'haml-rails'
 gem 'compass'
 gem 'html5-boilerplate'
 gem 'dynamic_form'
+gem 'newrelic_rpm'
 
 group :development, :test do
   gem 'capybara'

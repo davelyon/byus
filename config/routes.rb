@@ -7,5 +7,8 @@ Byus::Application.routes.draw do
   end
   match "b/:bin_id", to: "links#create", as: 'bookmarklet'
 
+  # Simple heartbeat check. Don't waste resources
+  match 'heartbeat', to: proc { [200, {}, ''.chars] }
+
   root to: 'bins#new'
 end
