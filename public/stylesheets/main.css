@@ -166,3 +166,11 @@ ul.links a.long_link {
   font-size: larger;
   margin-bottom: 20px;
 }
+
+.no_links {
+  text-align: center;
+  font-weight: bold;
+  width: 100%;
+  padding: 20px 0;
+  background: #eee;
+}

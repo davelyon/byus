@@ -23,6 +23,9 @@
   = link_to "48h", bin_links_path(bin,time: 48), {class: class_for_time_selection('48')}
   = link_to "1w" , bin_links_path(bin,time: 168), {class: class_for_time_selection('168')}
 #link_list
-  -unless links.empty?
+  -if links.empty?
+    .no_links
+      No links have been added recently! Why don't you add one now? ;)
+  -else
     %ul.links
       =render links

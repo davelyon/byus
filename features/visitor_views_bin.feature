@@ -21,3 +21,8 @@ Feature: Visitor views bin
     And I should see "http://google.com/" within ".links"
     And I should see "http://news.ycombinator.com/" within ".links"
     And I should see "http://oooooooooooooooooooooooooooooooooooooooooooooooooo..." within ".links"
+
+  Scenario: no links
+    Given 1 bin
+    When I am on the bin show page
+    Then I should see "No links have been added recently!"

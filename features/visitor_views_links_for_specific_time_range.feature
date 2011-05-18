@@ -34,3 +34,11 @@ Feature: Visitor views links for specific time range
     And I should not see "http://foobears-are-ok.co.uk"
     And I should see "https://foobears-are-fubar.org"
     And I should not see "http://foobear-is-dead.cn"
+
+  Scenario: public
+    When I am on the public bin show page
+    And I follow "48h"
+    Then I should not see "http://foobears-are-scary.com"
+    And I should see "http://foobears-are-ok.co.uk"
+    And I should see "https://foobears-are-fubar.org"
+    And I should not see "http://foobear-is-dead.cn"
