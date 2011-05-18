@@ -22,7 +22,7 @@ h1.page_title {
   margin-bottom: 20px;
 }
 
-h2 {
+h2.subtitle {
   font-size: larger;
   display: block;
   border: 0px #06C solid;

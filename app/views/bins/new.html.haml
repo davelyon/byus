@@ -6,7 +6,7 @@
       = link.label :location
       = link.url_field :location, {placeholder: "Enter a URL", class: 'link_location'}
     = f.submit "Create", {class: 'link_submit'}
-= error_messages_for link, id: 'link_errors'
+= error_messages_for bin, id: 'link_errors'
 #explanation
   %h2.subtitle
     Share links with friends
@@ -15,10 +15,8 @@
   %h3
     Getting started is as simple as:
   %ul
-    %li Create a bin from any URL (that's a web address, like http://example.com)
-    %li Bookmark your bin's private URL
-    %li
-      Add your bin's bookmarklet to your address bar
-      = link_to '(Need help?)', '#'
-    %li Any time you want to add a link to your bin, just click the bookmarklet
-    %li Share your private link with people you want to share links with
+    %li Create a bin 
+    %li Bookmark your bin
+    %li Get your bookmarklet
+    %li Add links with the bookmarklet
+    %li Share public or private access with friends
