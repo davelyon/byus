@@ -10,8 +10,7 @@ class LinksController < ApplicationController
     end
   end
   expose(:links) do
-    time = params[:time].nil? ? 24 : [params[:time].to_i, 168].min
-    bin.links.where("updated_at >= ?", time.hours.ago)
+    bin.links.from_hours_ago(params[:time])
   end
 
   def create

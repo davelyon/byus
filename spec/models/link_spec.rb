@@ -99,4 +99,20 @@ describe Link do
     end
   end
 
+  describe "#viewing_range" do
+    subject { Link.viewing_range(time) }
+    context "when time one of 24,48,168" do
+      let(:time) { "48" }
+      it "returns that time" do
+        subject.should == time
+      end
+    end
+    context "when time not one of 24,48,168" do
+      let(:time) { "1000" }
+      it "returns 24 as a default" do
+        subject.should == "24"
+      end
+    end
+  end
+
 end
