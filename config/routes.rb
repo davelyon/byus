@@ -13,7 +13,7 @@ Byus::Application.routes.draw do
       resources :links, only: :index
     end
   end
-  match "b/:bin_id", to: "links#create", as: 'bookmarklet'
+  match "b/:bin_id", to: "links#bookmarklet", as: 'bookmarklet'
 
   # Simple heartbeat check. Don't waste resources
   match 'heartbeat', to: proc { [200, {}, ''.chars] }

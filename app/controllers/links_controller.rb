@@ -16,8 +16,8 @@ class LinksController < ApplicationController
   def create
     link.touch unless link.new_record?
     if link.save
-      if request.get?
-        render 'bins/_bookmarklet_response'
+      if request.xhr?
+        render text: '', status: 200
       else
         flash[:success] = "Link Added"
         redirect_to bin_links_path link.bin.secret_hash
@@ -36,6 +36,10 @@ class LinksController < ApplicationController
     bin.links.find(params[:id]).destroy
     flash[:success] = "Link deleted"
     redirect_to bin_links_path(bin)
+  end
+
+  def bookmarklet
+    render 'bins/_bookmarklet_response'
   end
 
 end

@@ -10,9 +10,9 @@ gem 'dynamic_form'
 gem 'newrelic_rpm'
 
 group :development, :test do
-  gem 'capybara'
+  gem 'capybara', '~> 0.4'
   gem 'cucumber'
-  gem 'cucumber-rails'
+  gem 'cucumber-rails', '0.4.1'
   gem 'database_cleaner'
   gem 'fabrication'
   gem 'faker'
