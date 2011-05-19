@@ -17,6 +17,8 @@ class LinksController < ApplicationController
     link.touch unless link.new_record?
     if link.save
       if request.xhr?
+        headers['Access-Control-Allow-Origin'] = '*'
+        headers['Access-Control-Request-Method'] = 'POST, OPTIONS'
         render text: '', status: 200
       else
         flash[:success] = "Link Added"
