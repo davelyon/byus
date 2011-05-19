@@ -42,4 +42,13 @@ class LinksController < ApplicationController
     render 'bins/_bookmarklet_response'
   end
 
+  def cross_site_sharing
+    headers['Access-Control-Allow-Origin'] = '*'
+    headers['Access-Control-Request-Method'] = 'POST, OPTIONS'
+    headers['Access-Control-Allow-Headers'] = 'X-Requested-With'
+    headers['Access-Control-Max-Age'] = '1278000'
+    headers['Content-Length'] = '0'
+    headers['Content-Type'] = 'text/plain'
+    render nothing: true, status: 200
+  end
 end

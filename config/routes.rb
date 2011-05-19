@@ -4,6 +4,7 @@ Byus::Application.routes.draw do
 
   resources :bins, only: [:create, :update, :new] do
     match "", to: 'links#index', via: :get
+    match '/links', to: 'links#cross_site_sharing', via: :options
     resources :links, only: [:create, :destroy, :index]
   end
 

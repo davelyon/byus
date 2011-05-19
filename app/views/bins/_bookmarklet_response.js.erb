@@ -1,33 +1,31 @@
-(function() {
-  var injectSaveDiv, req, saveDiv;
-  saveDiv = function() {
-    var _div, _style;
-    _style = 'background-color: #FFF;\ncolor: #000;\nfont-size: 24px;\ndisplay: block;\ntext-align: center;\npadding: 20px;\nposition: fixed;\ntop: 10px;\nleft: 10px;\nz-index: 999;\nborder:4px solid #000;';
-    _div = document.createElement('div');
-    _div.id = 'byus_link_saver';
-    _div.innerHTML = "Link Saved <br/> To Bin";
-    _div.setAttribute("style", _style);
-    return _div;
-  };
-  removeSaveDiv = function() {
-    var elem = document.getElementById('byus_link_saver');
-    document.body.removeChild(elem);
+var injectSaveDiv, req, saveDiv;
+saveDiv = function() {
+  var _div, _style;
+  _style = 'background-color: #FFF;\ncolor: #000;\nfont-size: 24px;\ndisplay: block;\ntext-align: center;\npadding: 20px;\nposition: fixed;\ntop: 10px;\nleft: 10px;\nz-index: 999;\nborder:4px solid #000;';
+  _div = document.createElement('div');
+  _div.id = 'byus_link_saver';
+  _div.innerHTML = "Link Saved <br/> To Bin";
+  _div.setAttribute("style", _style);
+  return _div;
+};
+removeSaveDiv = function() {
+  var elem = document.getElementById('byus_link_saver');
+  document.body.removeChild(elem);
+}
+injectSaveDiv = function() {
+  var doc, loc;
+  doc = document;
+  doc.title = doc.title.replace('(Saving...)', '');
+  doc.body.appendChild(saveDiv());
+};
+req = new XMLHttpRequest();
+req.onreadystatechange = function() {
+  if (req.readyState === 4 && (req.status == 200)) {
+    injectSaveDiv();
+    setTimeout(removeSaveDiv, 3000);
   }
-  injectSaveDiv = function() {
-    var doc, loc;
-    doc = document;
-    doc.title = doc.title.replace('(Saving...)', '');
-    doc.body.appendChild(saveDiv());
-  };
-  req = new XMLHttpRequest();
-  req.onreadystatechange = function() {
-    if (req.readyState === 4 && (req.status == 200)) {
-      injectSaveDiv();
-      setTimeout(removeSaveDiv, 3000);
-    }
-  };
-  req.open("POST", "<%=bin_links_url(bin,link)-%>", true);
-  req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-  req.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
-  req.send("link[location]=" + document.location);
-}).call(this);
+};
+req.open("POST", "<%=bin_links_url(bin)-%>", true);
+req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+req.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+req.send("link[location]=" + document.location);
