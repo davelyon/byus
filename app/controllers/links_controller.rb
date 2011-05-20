@@ -9,9 +9,8 @@ class LinksController < ApplicationController
       bin.links.build
     end
   end
-  expose(:links) do
-    bin.links.from_hours_ago(params[:time])
-  end
+  expose(:links) { bin.links.from_hours_ago(params[:time]) }
+  expose(:latest_links) { Link.latest }
 
   def create
     link.touch unless link.new_record?
@@ -32,6 +31,10 @@ class LinksController < ApplicationController
         render new_bin_path
       end
     end
+  end
+
+  def latest
+
   end
 
   def destroy

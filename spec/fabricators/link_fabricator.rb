@@ -1,3 +1,3 @@
 Fabricator(:link) do
-  location "http://reddit.com/r/ruby"
+  location { Fabricate.sequence(:location) { |n| "http://reddit.com/r/ruby#{n}" } }
 end
