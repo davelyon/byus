@@ -85,6 +85,7 @@ ul.links {
 
 ul.links li{
   font-size: 18px;
+  padding: 6px;
 }
 
 .bin_link_light {
@@ -185,4 +186,8 @@ ul.links a.long_link {
 ul.bin_access {
   list-style-type: none;
   margin: 0;
+}
+
+a:visited {
+  color: #555 !important;
 }
