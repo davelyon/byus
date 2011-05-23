@@ -12,7 +12,7 @@ class Link < ActiveRecord::Base
 
   scope(:from_hours_ago,
         ->(hours) {where("updated_at >= ?",Link.viewing_range(hours).to_i.hours.ago)})
-  scope :latest, order(:created_at).limit(30)
+  scope :latest, order(:created_at).limit(30).joins(:bin).where('allow_public = ?', true)
 
   def secret_hash
     bin.secret_hash
