@@ -17,3 +17,10 @@ Feature: Visitor sets bin to private
     And I follow "Make this bin public"
     Then I should be on the bin show page
     And I should see "Public" within bin public status
+
+  Scenario: Visit public view of private bin
+    Given the following bin:
+      | title        | My Private Bin |
+      | allow_public | false          |
+    When I go to the public bin show page
+    Then I should be on the root page
