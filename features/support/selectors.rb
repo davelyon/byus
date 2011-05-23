@@ -14,6 +14,9 @@ module HtmlSelectorsHelpers
     when /the second link/
       [:css, ".links li:nth-child(2)"]
 
+    when /bin public status/
+      ".public"
+
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #

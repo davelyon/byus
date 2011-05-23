@@ -8,10 +8,10 @@
     %li= link_to "Your Secret URL",bin_url(bin.secret_hash)
     %li= render 'bins/bookmarklet'
     %li= link_to_if bin.allow_public?, "Public Link", public_bin_links_path(bin.public_hash)
-    - unless bin.allow_public?
-      %li= link_to "Make this bin public",bin_path(bin, bin: { allow_public:true } ), method: :put
-    - else
+    - if bin.allow_public?
       %li= link_to "Make this bin private", bin_path(bin, bin: { allow_public:false } ), method: :put
+    - else
+      %li= link_to "Make this bin public",bin_path(bin, bin: { allow_public:true } ), method: :put
   = form_for bin do |f|
     = f.label :title, "Change Bin Title:"
     = f.text_field :title
