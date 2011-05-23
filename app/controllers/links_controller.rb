@@ -10,7 +10,7 @@ class LinksController < ApplicationController
     end
   end
   expose(:links) { bin.links.from_hours_ago(params[:time]) }
-  expose(:latest_links) { Link.latest }
+  expose(:latest_links) { Link.nonprivate.latest }
 
   def create
     link.touch unless link.new_record?
