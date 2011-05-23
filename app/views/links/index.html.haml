@@ -5,11 +5,15 @@
     = f.label :title, "Change Bin Title:"
     = f.text_field :title
     = f.submit "Change Title"
+  - unless bin.allow_public?
+    = link_to "Make this bin public",bin_path(bin, bin: { allow_public:true } ), method: :put
+  - else
+    = link_to "Make this bin private", bin_path(bin, bin: { allow_public:false } ), method: :put
 .secret_link
   You must copy this link to return to this page:
   = link_to "Your Secret URL",bin_url(bin.secret_hash)
   = render 'bins/bookmarklet'
-  = link_to "Public Link", public_bin_links_path(bin.public_hash)
+  = link_to_if bin.allow_public?, "Public Link", public_bin_links_path(bin.public_hash)
 .new_link_form
   = form_for [bin,link] do |f|
     #link_fields
@@ -18,6 +22,7 @@
       = f.submit "Add", {class: 'link_submit'}
 = error_messages_for link, id: 'link_errors'
 #time_frame_selection
+  %p.public_status= "This bin is #{ bin.public_status }"
   Show links from the last:
   = link_to "24h", bin_links_path(bin,time: 24), {class: class_for_time_selection('24')}
   = link_to "48h", bin_links_path(bin,time: 48), {class: class_for_time_selection('48')}

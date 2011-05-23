@@ -13,6 +13,12 @@ describe Bin do
     it { should_not allow_mass_assignment_of :secret_hash }
   end
 
+  describe "defaults" do
+    it "is public" do
+      subject.should be_allow_public
+    end
+  end
+
   describe "#callbacks" do
     context "before validation" do
       context "on create" do
@@ -37,6 +43,19 @@ describe Bin do
           end
         end
       end
+    end
+  end
+
+  describe "#public_status" do
+    subject { Fabricate(:bin) }
+    before { subject.stub!(:allow_public?).and_return(is_public) }
+    context "when public" do
+      let(:is_public) { true }
+      its(:public_status) { should == 'public' }
+    end
+    context "when private" do
+      let(:is_public) { false }
+      its(:public_status) { should == 'private' }
     end
   end
 end

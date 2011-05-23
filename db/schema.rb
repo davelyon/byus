@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110518161630) do
+ActiveRecord::Schema.define(:version => 20110523144048) do
 
   create_table "bins", :force => true do |t|
     t.string   "title"
@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(:version => 20110518161630) do
     t.datetime "updated_at"
     t.string   "secret_hash"
     t.string   "public_hash"
+    t.boolean  "allow_public", :default => true
   end
 
   add_index "bins", ["public_hash"], :name => "index_bins_on_public_hash"

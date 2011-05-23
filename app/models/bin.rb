@@ -2,7 +2,7 @@ require 'digest/sha1'
 class Bin < ActiveRecord::Base
   has_many :links, order: 'links.updated_at DESC', inverse_of: :bin
 
-  attr_accessible :title, :links_attributes
+  attr_accessible :title, :links_attributes, :allow_public
   accepts_nested_attributes_for :links
 
   validates_presence_of :secret_hash, :public_hash, :title
@@ -12,6 +12,10 @@ class Bin < ActiveRecord::Base
 
   def to_param
     secret_hash
+  end
+
+  def public_status
+    allow_public? ? 'public' : 'private'
   end
 
   private

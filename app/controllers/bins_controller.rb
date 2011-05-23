@@ -13,9 +13,11 @@ class BinsController < ApplicationController
 
   def update
     if bin.update_attributes(params[:bin])
-      flash[:success] = "Updated name!"
+      flash[:success] = "Bin Updated: "
+      flash[:success] << "Updated name!" if params[:bin][:title]
+      flash[:success] << "Bin is now #{ bin.public_status }" if params[:bin][:allow_public]
     else
-      flash[:error] = "Unable to change name!"
+      flash[:error] = "Unable to update bin"
     end
     redirect_to bin_links_path(bin)
   end
