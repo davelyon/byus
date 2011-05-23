@@ -12,7 +12,7 @@ module HtmlSelectorsHelpers
       "html > body"
 
     when /the second link/
-      [:xpath, "//li[2]"]
+      [:css, ".links li:nth-child(2)"]
 
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
