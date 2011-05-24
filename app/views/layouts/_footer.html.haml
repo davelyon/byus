@@ -1,3 +1,6 @@
 %small.copyright
   Copyright &copy; #{Date.today.year}
   = link_to "Dave Lyon", 'http://davelyon.net/'
+
+- if ::Rails.env.development?
+  = link_to "Last Bin", Bin.last

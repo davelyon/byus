@@ -7,16 +7,29 @@
       = link.url_field :location, {placeholder: "Enter a URL", class: 'link_location'}
     = f.submit "Create", {class: 'link_submit'}
 = error_messages_for bin, id: 'link_errors'
-#explanation
-  %h2.subtitle
-    Share links with friends
-  %p
-    Do you ever find yourself sending links to your friends through email, IMs, twitter, facebook, or other methods?  Do you wish you could save time and just <em>share links with a single click?</em>
-  %h3
-    Getting started is as simple as:
-  %ul
-    %li Create a bin 
-    %li Bookmark your bin
-    %li Get your bookmarklet
-    %li Add links with the bookmarklet
-    %li Share public or private access with friends
+#service_info
+  #getting_started
+    %h2.subtitle
+      Getting started:
+    %ul
+      %li Create a bin
+      %li Bookmark your bin
+      %li Add links
+      %li Share
+  #explanation
+    %h2.subtitle
+      Share links with friends
+    %p
+      Do you ever find yourself sending links to your friends through email,
+      IMs, twitter, facebook, or other methods?
+      Do you wish you could save time and justi
+      %em share links with a single click?
+    %h3 Sharing is easy
+    %p
+      Make a bin (a place to hold links) and share either the public or private
+      link with friends.
+    %p
+      Now you can share links with friends even if they're not available.
+    %p
+      No more sticky notes, emails, or other annoying reminders, just add the link to your bin and
+      and forget it!  Just make sure to come back once a day an check what your friends added!

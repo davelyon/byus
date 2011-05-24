@@ -1,0 +1,90 @@
+#bin_explanation {
+  width: 55%;
+  margin-left: 42%;
+}
+
+p {
+  margin-bottom: 10px;
+}
+
+.new_link_form {
+  height: 75px;
+}
+
+.new_link_form input {
+  font-size: 35px;
+}
+
+.new_link_form label{
+  font-size: 20px;
+}
+
+.new_link_form input.link_location{
+  float: left;
+  width: 75%;
+}
+
+.new_link_form input.link_submit{
+  float: right;
+  width: 160px;
+  height: 45px;
+  border: 2px solid;
+  background-color: #06C;
+  color: #FFF;
+  font-size: 35px;
+}
+
+.new_link_form label {
+  display: none;
+}
+
+.no_links {
+  text-align: center;
+  font-weight: bold;
+  width: 100%;
+  padding: 20px 0;
+  background: #eee;
+}
+
+.public{
+  float: right;
+}
+
+#bin_access_links {
+}
+
+ul.bin_access {
+  list-style-type: none;
+  margin: 0;
+  float: left;
+  height: 100%;
+  width: 40%;
+}
+
+ul.bin_access li {
+  font-size: 110%;
+  padding: 10px;
+}
+
+#time_frame_selection {
+  font-size: large;
+  text-align: right;
+  margin-bottom: 20px;
+  clear: both;
+  width: 100%;
+}
+
+#time_frame_selection a{
+  color: #06C;
+  padding: 10px;
+}
+
+#time_frame_selection a.current_view {
+  background-color: #06C;
+  color: #FFF;
+  font-weight: bold;
+}
+
+#bin_controls {
+  margin-bottom: 20px;
+}
