@@ -16,10 +16,10 @@ Feature: Visitor views bin
     When I am on the bin show page
     Then I should see the bin hash
     And I should see the bin public link
-    And I should see "http://reddit.com/" within ".links"
-    And I should see "http://google.com/" within ".links"
-    And I should see "http://news.ycombinator.com/" within ".links"
-    And I should see "http://oooooooooooooooooooooooooooooooooooooooooooooooooo..." within ".links"
+    And I should see "http://reddit.com/" within the bins links
+    And I should see "http://google.com/" within the bins links
+    And I should see "http://news.ycombinator.com/" within the bins links
+    And I should see "http://oooooooooooooooooooooooooooooooooooooooooooooooooo..." within the bins links
 
   Scenario: no links
     Given 1 bin

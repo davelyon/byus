@@ -15,5 +15,5 @@ Feature: Visitor views bin
     When I am on the bin show page
     Then I should see the bin hash
     And I should see the bin public link
-    And I should see "The Reddit" within ".links"
-    And I should see "http://google.com/" within ".links"
+    And I should see "The Reddit" within the bins links
+    And I should see "http://google.com/" within the bins links

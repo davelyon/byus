@@ -17,21 +17,15 @@ module HtmlSelectorsHelpers
     when /bin public status/
       ".public"
 
-    # Add more mappings here.
-    # Here is an example that pulls values out of the Regexp:
-    #
-    #  when /the (notice|error|info) flash/
-    #    ".flash.#{$1}"
+    when /the (error|success) flash/
+      "#flash > .#{$1}"
 
-    # You can also return an array to use a different selector
-    # type, like:
-    #
-    #  when /the header/
-    #    [:xpath, "//header"]
+    when /the bins links/
+      ".links"
 
-    # This allows you to provide a quoted selector as the scope
-    # for "within" steps as was previously the default for the
-    # web steps:
+    when /the page title/
+      "h1.page_title"
+
     when /"(.+)"/
       $1
 
