@@ -1,6 +1,8 @@
 require 'spec_helper'
 
 describe Link do
+  let(:bin) { Fabricate(:bin) }
+
   describe "association" do
     it { should belong_to(:bin) }
   end
@@ -9,10 +11,10 @@ describe Link do
     before { subject.stub(:attach_bin) }
     it { should validate_presence_of(:bin) }
     it { should validate_presence_of(:location) }
+    it { should validate_presence_of(:title) }
   end
 
   describe "location" do
-    let(:bin) { Fabricate(:bin) }
     subject { Fabricate.build(:link, bin: bin) }
     context "when valid" do
       let(:http) { "http://reddit.com/" }
@@ -55,10 +57,9 @@ describe Link do
   end
 
   describe "creation" do
+    let(:bin2) { Fabricate(:bin) }
+    let(:link) { Fabricate.attributes_for(:link) }
     context "created with a bin" do
-      let(:bin) { Fabricate(:bin) }
-      let(:bin2) { Fabricate(:bin) }
-      let(:link) { Fabricate.attributes_for(:link) }
       before { bin.links.create!(link) }
       context "when creating duplicate in same bin" do
         it "should not save duplicate link" do
@@ -71,10 +72,21 @@ describe Link do
         end
       end
     end
+    context "created without title" do
+      subject { bin.links.build( link[:title] = "" ) }
+      it "assigns the location as the title" do
+        subject.title.should == subject.location
+      end
+    end
+    context "created with title" do
+      subject { bin.links.build( link ) }
+      it "uses the location" do
+        subject.title.should == link[:title]
+      end
+    end
   end
 
   describe "#secret_hash" do
-    let(:bin) { Fabricate(:bin) }
     subject { Fabricate(:link, bin: bin) }
     it "returns the bin hash" do
       subject.secret_hash.should == subject.bin.secret_hash
@@ -111,6 +123,22 @@ describe Link do
       let(:time) { "1000" }
       it "returns 24 as a default" do
         subject.should == "24"
+      end
+    end
+  end
+
+  describe "#display_title" do
+    subject { bin.links.create!( attrs ) }
+    context "no title" do
+      let(:attrs) { { location: "http://google.com/"} }
+      it "returns the location" do
+        subject.display_title.should == subject.location
+      end
+    end
+    context "with title" do
+      let(:attrs) { Fabricate.attributes_for(:titled_link) }
+      it "returns the title" do
+        subject.display_title.should == subject.title
       end
     end
   end

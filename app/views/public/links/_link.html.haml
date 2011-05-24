@@ -1,3 +1,3 @@
 - url = link.location
 %li{ class: cycle('bin_link_dark','bin_link_light') }
-  = link_to truncate(url, length: 60), url
+  = link_to truncate(link.display_title, length: 60), url
