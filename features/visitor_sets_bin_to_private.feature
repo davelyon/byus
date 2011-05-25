@@ -8,6 +8,7 @@ Feature: Visitor sets bin to private
     And I follow "Make this bin private"
     Then I should be on the bin show page
     And I should see "Private" within bin public status
+    And I should not see "Public Link"
 
   Scenario: Private to Public
     Given the following bin:

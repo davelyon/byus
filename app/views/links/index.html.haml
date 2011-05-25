@@ -7,9 +7,10 @@
       %li
         = link_to "Your Secret URL",bin_url(bin.secret_hash)
         &#151; Share with people you trust
-      %li
-        = link_to_if bin.allow_public?, "Public Link", public_bin_links_path(bin.public_hash)
-        &#151; Share with anyone
+      - if bin.allow_public?
+        %li
+          = link_to "Public Link", public_bin_links_path(bin.public_hash)
+          &#151; Share with anyone
       %li
         = render 'bins/bookmarklet'
         &#151; Add links quickly
