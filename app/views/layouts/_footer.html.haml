@@ -1,6 +1,9 @@
 %small.copyright
   Copyright &copy; #{Date.today.year}
   = link_to "Dave Lyon", 'http://davelyon.net/'
+%em.contact_me
+  Bugs/Comments/Complaints:
+  = mail_to 'isby@davelyon.net',"E-mail me"
 
 - if ::Rails.env.development?
   = link_to "Last Bin", Bin.last

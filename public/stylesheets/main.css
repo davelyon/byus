@@ -112,3 +112,8 @@ ul.links a.delete {
 
 #service_info {
 }
+
+em.contact_me {
+  float: right;
+  text-align: right;
+}
