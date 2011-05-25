@@ -12,6 +12,10 @@ class LinksController < ApplicationController
   expose(:links) { bin.links.from_hours_ago(params[:time]) }
   expose(:latest_links) { Link.nonprivate.latest }
 
+  def index
+    redirect_to root_path unless bin
+  end
+
   def create
     link.touch unless link.new_record?
     if link.save

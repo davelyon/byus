@@ -3,7 +3,7 @@ class Public::LinksController < ApplicationController
   expose(:links) { bin.links.from_hours_ago(params[:time])}
 
   def index
-    redirect_to root_path unless bin.allow_public?
+    redirect_to root_path unless bin && bin.allow_public?
   end
 
 end
