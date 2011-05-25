@@ -1,6 +1,8 @@
+- content_for :head do
+  %link{rel: 'alternate', type: 'application/rss+xml', href: "#{public_bin_links_url(bin.public_hash, format: 'xml')}"}
 %h1.page_title
-  Current Bin:
-  = bin.title
+  = "#{bin.title} Bin"
+  = link_to image_tag("feed-small.png"), public_bin_links_path(bin.public_hash,format: 'xml')
 #time_frame_selection
   Show links from the last:
   = link_to "24h", public_bin_links_path(bin.public_hash,time: 24), {class: class_for_time_selection('24')}
