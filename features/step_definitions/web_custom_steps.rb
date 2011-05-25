@@ -4,4 +4,5 @@ end
 
 And /^I debug$/ do
   debugger
+  true
 end

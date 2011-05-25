@@ -29,6 +29,12 @@ module HtmlSelectorsHelpers
     when /the title/
       "head > title"
 
+    when /xml link title/
+      [:css, "item > title"]
+
+    when /xml title/
+      [:css, "channel > title"]
+
     when /"(.+)"/
       $1
 

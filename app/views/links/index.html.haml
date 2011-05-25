@@ -1,5 +1,8 @@
+- content_for :head do
+  %link{rel: 'alternate', type: 'application/rss+xml', href: "#{bin_links_url(bin, format: 'xml')}"}
 %h1.page_title
   = "#{bin.title} Bin"
+  = link_to image_tag("feed-small.png"), bin_links_path(bin,format: 'xml')
   %span.public= bin.public_status.capitalize
 #bin_controls
   #bin_access_links

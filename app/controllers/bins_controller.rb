@@ -1,6 +1,5 @@
 class BinsController < ApplicationController
   expose(:bin) { Bin.find_by_secret_hash(params[:id]) || Bin.new(params[:bin]) }
-  # expose(:link) { bin.links.build(params[:link]) }
 
   def create
     unless bin.links.first.valid?

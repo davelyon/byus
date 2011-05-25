@@ -14,6 +14,10 @@ class LinksController < ApplicationController
 
   def index
     redirect_to root_path unless bin
+    respond_to do |wants|
+      wants.html
+      wants.xml { render action: 'index', layout: false }
+    end
   end
 
   def create
