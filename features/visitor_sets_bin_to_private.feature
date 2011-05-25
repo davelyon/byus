@@ -24,3 +24,4 @@ Feature: Visitor sets bin to private
       | allow_public | false          |
     When I go to the public bin show page
     Then I should be on the root page
+    And I should see "That bin is private!"

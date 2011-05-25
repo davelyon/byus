@@ -3,7 +3,10 @@ class Public::LinksController < ApplicationController
   expose(:links) { bin.links.from_hours_ago(params[:time])}
 
   def index
-    redirect_to root_path unless bin && bin.allow_public?
+    unless bin && bin.allow_public?
+      flash[:error] = "That bin is private!"
+      redirect_to root_path
+    end
   end
 
 end
