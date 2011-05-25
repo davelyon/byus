@@ -9,8 +9,8 @@ Feature: Visitor adds duplicate link to bin
     Given 1 bin
     And that bin has the following links:
       | location                     |
-      | http://reddit.com/           |
-      | http://google.com/           |
+      | http://reddit.com            |
+      | http://google.com            |
       | http://news.ycombinator.com/ |
 
   Scenario: Success

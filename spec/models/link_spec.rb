@@ -109,6 +109,12 @@ describe Link do
         should == url
       end
     end
+    context "with a blank url" do
+      let(:url) { "" }
+      it "returns nil" do
+        should == nil
+      end
+    end
   end
 
   describe "#viewing_range" do

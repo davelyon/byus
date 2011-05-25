@@ -8,8 +8,7 @@ class Link < ActiveRecord::Base
     message: "should be like http://example.com/"
   validates_uniqueness_of :location, scope: :bin_id
 
-  before_validation :normalize_location
-  before_validation :assign_title
+  before_validation :normalize_location, :assign_title
 
   scope(:from_hours_ago,
         ->(hours) {where("updated_at >= ?",Link.viewing_range(hours).to_i.hours.ago)})
@@ -21,6 +20,7 @@ class Link < ActiveRecord::Base
   end
 
   def self.normalize_url(url)
+    return if url.blank?
     begin
       URI.parse(url).normalize.to_s
     rescue URI::InvalidURIError
@@ -39,7 +39,7 @@ class Link < ActiveRecord::Base
   private
 
   def normalize_location
-    location = Link.normalize_url(location)
+    self.location = Link.normalize_url(location)
   end
 
   def assign_title

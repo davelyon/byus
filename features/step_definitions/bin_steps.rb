@@ -21,6 +21,6 @@ And /^that bin has (\d+) links$/ do |count|
 end
 
 Then /^I should see "([^"]*)" in link position (\d+)$/ do |link, position|
-  node = page.find(".links li:nth-child(#{position}) a:nth-child(1)")
+  node = page.find("#link_list li:nth-child(#{position}) a:nth-child(1)")
   node[:href].should == link
 end
