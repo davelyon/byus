@@ -1,8 +1,12 @@
 class BinsController < ApplicationController
   expose(:bin) { Bin.find_by_secret_hash(params[:id]) || Bin.new(params[:bin]) }
-  expose(:link) { bin.links.build(params[:link]) }
+  # expose(:link) { bin.links.build(params[:link]) }
 
   def create
+    unless bin.links.first.valid?
+      bin.title = bin.links.first.location
+      bin.links.clear
+    end
     if bin.save
       redirect_to bin_links_path(bin)
     else
