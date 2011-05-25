@@ -60,4 +60,12 @@ class LinksController < ApplicationController
     headers['Content-Type'] = 'text/plain'
     render nothing: true, status: 200
   end
+
+  def title
+    if bin
+      "#{bin.title} Bin"
+    else
+      "Latest"
+    end
+  end
 end

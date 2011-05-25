@@ -21,4 +21,8 @@ class BinsController < ApplicationController
     end
     redirect_to bin_links_path(bin)
   end
+
+  def title
+    "Make a Bin"
+  end
 end

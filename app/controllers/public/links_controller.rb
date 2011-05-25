@@ -9,4 +9,8 @@ class Public::LinksController < ApplicationController
     end
   end
 
+  def title
+    "#{bin.title} Bin"
+  end
+
 end

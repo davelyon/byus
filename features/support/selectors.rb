@@ -26,6 +26,9 @@ module HtmlSelectorsHelpers
     when /the page title/
       "h1.page_title"
 
+    when /the title/
+      "head > title"
+
     when /"(.+)"/
       $1
 

@@ -11,4 +11,8 @@ class ApplicationController < ActionController::Base
       redirect_to "http://#{APP_DOMAIN}#{request.env['PATH_INFO']}", status: 301
     end
   end
+
+  def title
+    ""
+  end
 end
