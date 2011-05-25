@@ -1,6 +1,6 @@
 #bin_explanation {
-  width: 55%;
-  margin-left: 42%;
+  width: 65%;
+  margin: 10px auto;
 }
 
 p {
@@ -51,19 +51,24 @@ p {
 }
 
 #bin_access_links {
+  clear: both;
+  min-height: 80px;
 }
 
 ul.bin_access {
   list-style-type: none;
   margin: 0;
-  float: left;
-  height: 100%;
-  width: 40%;
+  width: 100%;
 }
 
 ul.bin_access li {
   font-size: 110%;
   padding: 10px;
+  display: inline;
+  float: left;
+  text-align: center;
+  background-color: #EEE;
+  width: 30%;
 }
 
 #time_frame_selection {
@@ -87,4 +92,18 @@ ul.bin_access li {
 
 #bin_controls {
   margin-bottom: 20px;
+}
+
+#current_help, .help {
+  background-color: #FFF8C6;
+  padding: 20px;
+  margin-top: 20px;
+}
+
+.help a {
+  float: right;
+}
+
+.help a:after {
+  content: url('../images/cross.png');
 }

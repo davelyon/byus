@@ -82,14 +82,14 @@ ul.links a.delete {
 }
 
 #flash div.error {
-  background: #ff6840;
+  background: #E55451;
 }
 
 #link_errors {
   margin-top: 20px;
   width: 100%;
   color: #000;
-  background: #FF6840;
+  background: #E55451;
   padding: 10px 0 10px 10px;
   font-size: larger;
   margin-bottom: 20px;

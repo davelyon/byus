@@ -8,7 +8,7 @@ Feature: Visitor changes bin title
     Given the following bin:
       | title | http://reddit.com|
     And I am on the bin show page
-    When I follow "Change Bin Title"
+    When I follow "Rename Bin"
     And I fill in "bin_title" with "My Reddit Bin"
     And I press "Change Title"
     Then I should be on the bin show page

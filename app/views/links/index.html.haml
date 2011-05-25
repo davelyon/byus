@@ -8,39 +8,51 @@
   #bin_access_links
     %ul.bin_access
       %li
-        = link_to "Your Secret URL",bin_url(bin.secret_hash)
-        &#151; Share with people you trust
-      - if bin.allow_public?
+        = link_to "Private Link",bin_url(bin.secret_hash)
+        = image_tag("information.png", {id: 'info_secret'})
         %li
-          = link_to "Public Link", public_bin_links_path(bin.public_hash)
-          &#151; Share with anyone
+          = link_to_if bin.allow_public?, "Public Link", public_bin_links_path(bin.public_hash) do
+            Bin is Private
+          = image_tag("information.png", {id: 'info_public'})
       %li
         = render 'bins/bookmarklet'
-        &#151; Add links quickly
+        = image_tag("information.png", {id: 'info_bookmarklet'})
       %li
-        = link_to "Change Bin Title", edit_bin_path(bin)
+        = link_to "Rename Bin", edit_bin_path(bin)
       - if bin.allow_public?
         %li= link_to "Make this bin private", bin_path(bin, bin: { allow_public:false } ), method: :put
       - else
         %li= link_to "Make this bin public",bin_path(bin, bin: { allow_public:true } ), method: :put
+      %li= link_to "RSS Feed", bin_links_path(bin, format: 'xml')
   #bin_explanation
-    %h3 What is a bin?
-    %p
-      %em A bin
-      is a place to put links that you want to share with others.
-      You may share either a public or private link to this bin that will allow others to see these links.
-    %p
-      The
-      %em private link
-      allows changes to be made by anyone at any time, so share it wiseley.
-    %p
-      The
-      %em public link
-      will allow people to see links that have been shared, but not make any changes or add any links.  You can share this with anyone safely.
-    %p
-      The
-      %em bookmarklet
-      is a quick-save button for your bin.  Drag the bookmarklet to your bookmark bar in your browser, and you can click it from any page to have that page added to your bin.  You'll see a notification in the top left corner of the current page to indicate that it was saved.
+    .help#base_help
+      = link_to "", 'javascript:$(".help").slideUp(1500);'
+      %h3 What is a bin?
+      %p
+        %em A bin
+        is a place to put links that you want to share with others.
+        You may share either a public or private link to this bin that will allow others to see these links.
+    .help#private_help{style: 'display: none'}
+      = link_to "", 'javascript:$(".help").slideUp(1500);'
+      %h3 What is a private link?
+      %p
+        The
+        %em private link
+        allows changes to be made by anyone at any time, so share it wiseley.
+    .help#public_help{style: 'display: none'}
+      = link_to "", 'javascript:$(".help").slideUp(1500);'
+      %h3 What is a public link?
+      %p
+        The
+        %em public link
+        will allow people to see links that have been shared, but not make any changes or add any links.  You can share this with anyone safely.
+    .help#bookmarklet_help{style: 'display: none'}
+      = link_to "", 'javascript:$(".help").slideUp(1500);'
+      %h3 What is a bookmarklet?
+      %p
+        The
+        %em bookmarklet
+        is a quick-save button for your bin.  Drag the bookmarklet to your bookmark bar in your browser, and you can click it from any page to have that page added to your bin.  You'll see a notification in the top left corner of the current page to indicate that it was saved.
 .new_link_form
   = form_for [bin,link] do |f|
     #link_fields
@@ -49,3 +61,17 @@
       = f.submit "Add", {class: 'link_submit'}
 = error_messages_for link, id: 'link_errors'
 = render 'listing'
+- content_for :javascripts do
+  %script
+    $("#info_public").click(function() {
+    $(".help").hide();
+    $("#public_help").show();
+    });
+    $("#info_secret").click(function() {
+    $(".help").hide();
+    $("#private_help").show();
+    });
+    $("#info_bookmarklet").click(function() {
+    $(".help").hide();
+    $("#bookmarklet_help").show();
+    });

@@ -1,9 +1,9 @@
 Then /^I should see the bin hash$/ do
-  page.should have_content "Your Secret URL"
+  page.should have_content "Private Link"
 end
 
 Then /^I should not see the bin hash$/ do
-  page.should_not have_content "Your Secret URL"
+  page.should_not have_content "Private Link"
 end
 
 Then /^I should see the bin public link$/ do
