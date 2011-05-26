@@ -103,3 +103,7 @@ ul.bin_access li {
 .help a {
   float: right;
 }
+
+.help a:after {
+  content: url('../images/cross.png');
+}
