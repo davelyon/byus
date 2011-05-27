@@ -1,8 +1,20 @@
+- post_location = bookmarklet_url(bin)
 - marklet = h(                                                                  |
   "javascript:function bsv(){var d=document,"+                                  |
   "z=d.createElement('scr'+'ipt'),b=d.body,"+                                   |
   "l=d.location;try{if(!b)throw(0);"+                                           |
   "z.setAttribute('src',"+                                                      |
-  "'#{bookmarklet_url(bin)}');"+                                                |
+  "'#{post_location}');"+                                                       |
   "b.appendChild(z);}catch(e){alert('Wait for page to load!');}}bsv();void(0)") |
-=link_to "Bookmarklet", marklet
+= link_to "Bookmarklet", marklet
+
+- if ::Rails.env.test?
+  - post_location += '?allow_same_domain=true'
+  - marklet = h(                                                                  |
+    "javascript:function bsv(){var d=document,"+                                  |
+    "z=d.createElement('scr'+'ipt'),b=d.body,"+                                   |
+    "l=d.location;try{if(!b)throw(0);"+                                           |
+    "z.setAttribute('src',"+                                                      |
+    "'#{post_location}');"+                                                       |
+    "b.appendChild(z);}catch(e){alert('Wait for page to load!');}}bsv();void(0)") |
+  = link_to "xBookmarklet-Same-Domain", marklet

@@ -1,5 +1,13 @@
 - content_for :head do
   %link{rel: 'alternate', type: 'application/rss+xml', href: "#{bin_links_url(bin, format: 'xml')}"}
+#bookmarklet_helper
+  %p
+    = image_tag("up_48.png")
+    Drag
+    = render 'bins/bookmarklet'
+    here
+    = link_to image_tag("cross.png"), "javascript:$('#bookmarklet_helper').slideUp(1000);"
+    = image_tag("up_48.png")
 %h1.page_title
   = "#{bin.title} Bin"
   = link_to image_tag("feed-small.png"), bin_links_path(bin,format: 'xml')

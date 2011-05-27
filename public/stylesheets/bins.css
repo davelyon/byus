@@ -1,3 +1,14 @@
+#bookmarklet_helper {
+  display: none;
+  font-size: 150%;
+  position: absolute;
+  border: 3px #E55451 solid;
+  background-color: #EEE;
+  padding: 20px;
+  top: 0px;
+  left: 30px;
+  color: #000;
+}
 #bin_explanation {
   width: 65%;
   margin: 10px auto;

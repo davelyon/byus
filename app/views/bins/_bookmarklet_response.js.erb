@@ -1,4 +1,4 @@
-var injectSaveDiv, req, saveDiv;
+var injectSaveDiv, req, saveDiv, sendRequest;
 saveDiv = function() {
   var _div, _style;
   _style = 'background-color: #FFF;\ncolor: #000;\nfont-size: 24px;\ndisplay: block;\ntext-align: center;\npadding: 20px;\nposition: fixed;\ntop: 10px;\nleft: 10px;\nz-index: 999;\nborder:4px solid #000;';
@@ -17,14 +17,25 @@ injectSaveDiv = function() {
   doc = document;
   doc.body.appendChild(saveDiv());
 };
-req = new XMLHttpRequest();
-req.onreadystatechange = function() {
-  if (req.readyState == 4 && (req.status == 200)) {
-    injectSaveDiv();
-    setTimeout(removeSaveDiv, 3000);
-  }
+sendRequest = function() {
+  req = new XMLHttpRequest();
+  req.onreadystatechange = function() {
+    if (req.readyState == 4 && (req.status == 200)) {
+      injectSaveDiv();
+      setTimeout(removeSaveDiv, 3000);
+    }
+  };
+  req.open("POST", "<%=bin_links_url(bin)-%>", true);
+  req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  req.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+  req.send("link[location]=" + document.location + "&link[title]=" + document.title);
+}
+<% if ::Rails.env.test? && params[:allow_same_domain] -%>
+  sendRequest();
+<%- else -%>
+if( document.location.hostname == "<%= request.host %>" ) {
+  $('#bookmarklet_helper').slideDown(1000);
+} else {
+  sendRequest();
 };
-req.open("POST", "<%=bin_links_url(bin)-%>", true);
-req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-req.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
-req.send("link[location]=" + document.location + "&link[title]=" + document.title);
+<%- end %>
