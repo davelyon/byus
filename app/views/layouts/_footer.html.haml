@@ -1,9 +1,14 @@
 %small.copyright
   Copyright &copy; #{Date.today.year}
   = link_to "Dave Lyon", 'http://davelyon.net/'
-%em.contact_me
-  Bugs/Comments/Complaints:
-  = mail_to 'isby@davelyon.net',"E-mail me"
+  %em.contact_me
+    Bugs/Comments/Complaints:
+    = mail_to 'isby@davelyon.net',"E-mail me"
+%p
+  Icons from:
+  = link_to "Fam Fam Fam : Silk Icons", "http://www.famfamfam.com/lab/icons/silk/"
+  and
+  = link_to "Pixel-Mixer : Basic", "http://pixel-mixer.com/basic_set/"
 
 - if ::Rails.env.development?
   = link_to "Last Bin", Bin.last
