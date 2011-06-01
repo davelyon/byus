@@ -1,6 +1,7 @@
 class StatsController < ApplicationController
   expose(:domains) { Domain.top }
-  def index
-  end
 
+  def title
+    "Stats"
+  end
 end
