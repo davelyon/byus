@@ -5,6 +5,7 @@ describe Link do
 
   describe "association" do
     it { should belong_to(:bin) }
+    it { should belong_to(:domain) }
   end
 
   describe "validation" do
@@ -12,6 +13,7 @@ describe Link do
     it { should validate_presence_of(:bin) }
     it { should validate_presence_of(:location) }
     it { should validate_presence_of(:title) }
+    it { should validate_presence_of(:domain) }
   end
 
   describe "location" do
@@ -82,6 +84,24 @@ describe Link do
       subject { bin.links.build( link ) }
       it "uses the location" do
         subject.title.should == link[:title]
+      end
+    end
+    context "created without a domain" do
+      subject { bin.links.create!(link) }
+      it "creates the domain" do
+        subject.domain.should be_valid
+      end
+    end
+    context "updates counter for domain" do
+      subject { bin.links.last.domain }
+      before { bin.links.create!(link) }
+      it "starts at one" do
+        subject.links_count.should == 1
+      end
+      it "increases by one" do
+        link[:location] << "foo"
+        bin.links.create!(link)
+        subject.links_count.should == 2
       end
     end
   end

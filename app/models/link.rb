@@ -2,13 +2,14 @@ class Link < ActiveRecord::Base
   TIME_RANGES = %w(24 48 168)
   DEFAULT_TIME_RANGE = "24"
   belongs_to :bin
+  belongs_to :domain, counter_cache: true
 
-  validates_presence_of :bin, :location, :title
+  validates_presence_of :bin, :location, :title, :domain
   validates_format_of :location , with: URI::regexp,
     message: "should be like http://example.com/"
   validates_uniqueness_of :location, scope: :bin_id
 
-  before_validation :normalize_location, :assign_title
+  before_validation :normalize_location, :assign_title, :assign_domain
 
   scope(:from_hours_ago,
         ->(hours) {where("updated_at >= ?",Link.viewing_range(hours).to_i.hours.ago)})
@@ -44,6 +45,13 @@ class Link < ActiveRecord::Base
 
   def assign_title
     self.title ||= location
+  end
+
+  def assign_domain
+    begin
+      self.domain = Domain.find_or_create_by_root(URI.parse(self.location).host)
+    rescue
+    end
   end
 
 end

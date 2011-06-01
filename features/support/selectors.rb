@@ -35,6 +35,9 @@ module HtmlSelectorsHelpers
     when /xml title/
       [:css, "channel > title"]
 
+    when /the top domains/
+      "#domains"
+
     when /"(.+)"/
       $1
 

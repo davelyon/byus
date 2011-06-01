@@ -1,0 +1,10 @@
+%h1.page_title
+  this.isby.us Statistics
+
+%h2.subtitle
+  Most Submitted Domains
+- unless domains.empty?
+  %ul#domains.links
+    - domains.each do |domain|
+      %li{ class: cycle('bin_link_dark', 'bin_link_light') }
+        = "#{domain.root} (#{domain.links_count})"
