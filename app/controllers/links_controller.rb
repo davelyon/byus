@@ -13,10 +13,14 @@ class LinksController < ApplicationController
   expose(:latest_links) { Link.nonprivate.latest }
 
   def index
-    redirect_to root_path unless bin
-    respond_to do |wants|
-      wants.html
-      wants.xml { render action: 'index', layout: false }
+    if bin.nil?
+      flash[:error] = "That bin does not exist"
+      redirect_to root_path
+    else
+      respond_to do |wants|
+        wants.html
+        wants.xml { render action: 'index', layout: false }
+      end
     end
   end
 
