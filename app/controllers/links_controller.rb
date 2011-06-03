@@ -20,6 +20,9 @@ class LinksController < ApplicationController
       respond_to do |wants|
         wants.html
         wants.xml { render action: 'index', layout: false }
+        wants.json { 
+          render json: Link.where(
+            "updated_at > ?", (Time.parse(params[:since]) + 5.seconds).to_param).order('updated_at DESC') }
       end
     end
   end

@@ -68,7 +68,13 @@
       = f.url_field :location, {placeholder: "Enter a URL", class: 'link_location'}
       = f.submit "Add", {class: 'link_submit'}
 = error_messages_for link, id: 'link_errors'
-= render 'listing'
+-# = render 'listing'
+#bin_links
+  %ul.links
+%script#link-template{type: "text/template"}
+  %li.bin_link_dark
+    <a href="<%= location %>"> <%= title%> </a>
+
 - content_for :javascripts do
   %script
     $("#info_public").click(function() {
@@ -83,3 +89,5 @@
     $(".help").hide();
     $("#bookmarklet_help").show();
     });
+  %script
+    = render 'model.js'
