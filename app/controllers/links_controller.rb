@@ -28,9 +28,7 @@ class LinksController < ApplicationController
     link.touch unless link.new_record?
     if link.save
       if request.xhr?
-        headers['Access-Control-Allow-Origin'] = '*'
-        headers['Access-Control-Request-Method'] = 'POST, OPTIONS'
-        render text: '', status: 200
+        render nothing: true, status: 200
       else
         flash[:success] = "Link Added"
         redirect_to bin_links_path link.bin.secret_hash
@@ -57,16 +55,6 @@ class LinksController < ApplicationController
 
   def bookmarklet
     render 'bins/_bookmarklet_response'
-  end
-
-  def cross_site_sharing
-    headers['Access-Control-Allow-Origin'] = '*'
-    headers['Access-Control-Request-Method'] = 'POST, OPTIONS'
-    headers['Access-Control-Allow-Headers'] = 'X-Requested-With'
-    headers['Access-Control-Max-Age'] = '1278000'
-    headers['Content-Length'] = '0'
-    headers['Content-Type'] = 'text/plain'
-    render nothing: true, status: 200
   end
 
   def title
