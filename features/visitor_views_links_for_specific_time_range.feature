@@ -1,3 +1,4 @@
+@javascript
 Feature: Visitor views links for specific time range
 
   In order to more quickly browse links

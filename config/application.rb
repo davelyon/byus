@@ -38,6 +38,7 @@ module Byus
 
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password]
+    ActiveRecord::Base.include_root_in_json = false
 
     config.generators do |g|
         g.test_framework      :rspec, :fixture => true

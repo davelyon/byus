@@ -1,3 +1,4 @@
+@javascript
 Feature: Visitor views bin
 
   In order to more easilly share links

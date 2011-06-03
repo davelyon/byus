@@ -1,3 +1,4 @@
+@javascript
 Feature: Visitor deletes link from bin
 
   In order to more easilly share links
@@ -12,7 +13,7 @@ Feature: Visitor deletes link from bin
       | http://google.com/           |
       | http://news.ycombinator.com/ |
     When I am on the bin show page
-    And I follow "delete" within the second link
+    And I follow "Delete" within the second link
     Then I should be on the bin show page
-    And I should see "Link deleted" within the success flash
+    # And I should see "Link deleted" within the success flash
     And I should not see "http://google.com" within the bins links

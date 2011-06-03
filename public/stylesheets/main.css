@@ -49,11 +49,8 @@ ul.links li{
   padding: 6px;
 }
 
-.bin_link_light {
-  /* background-color: #ddd; */
-}
 
-.bin_link_dark {
+ul.links li:nth-child(2n+1) {
   background-color: #EEE;
 }
 
@@ -65,7 +62,7 @@ ul.links a:visited {
   color: #88D;
 }
 
-ul.links a.delete {
+ul.links a.destroy {
   float: right;
 }
 

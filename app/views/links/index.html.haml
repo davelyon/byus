@@ -68,18 +68,32 @@
       = f.url_field :location, {placeholder: "Enter a URL", class: 'link_location'}
       = f.submit "Add", {class: 'link_submit'}
 = error_messages_for link, id: 'link_errors'
-= render 'listing'
+
+#bin_links
+  #time_frame_selection
+    Show links from the last:
+    = link_to "24h", "#links/24", { class: '24' }
+    = link_to "48h", "#links/48", { class: '48' }
+    = link_to "1w", "#links/168", { class: '168'}
+  %ul.links
+%script#link-template{type: "text/template"}
+  %a{href: "{{ location }}" }
+    {{ title }}
+  %a{href: '#', class: 'destroy'} Delete
+
 - content_for :javascripts do
-  %script
+  :javascript
     $("#info_public").click(function() {
-    $(".help").hide();
-    $("#public_help").show();
+      $(".help").hide();
+      $("#public_help").show();
     });
     $("#info_secret").click(function() {
-    $(".help").hide();
-    $("#private_help").show();
+      $(".help").hide();
+      $("#private_help").show();
     });
     $("#info_bookmarklet").click(function() {
-    $(".help").hide();
-    $("#bookmarklet_help").show();
+      $(".help").hide();
+      $("#bookmarklet_help").show();
     });
+  %script
+    = render 'model.js'

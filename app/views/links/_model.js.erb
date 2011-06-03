@@ -1,0 +1,152 @@
+<% bin_url =  bin_links_path(bin.secret_hash) %>
+$(document).ready( function() {
+  var Link = Backbone.Model.extend({
+    initialize: function(attributes) {
+      var title = attributes.title;
+      if(title.length > 60) {
+        attributes.title = title.slice(0,57) + "...";
+      }
+      this.set(attributes);
+    },
+    url: function() { return "<%= bin_url %>/" + this.id}
+  });
+
+  var BinLinks = Backbone.Collection.extend({
+    model: Link,
+    initialize: function() {
+      this.lastRequestTime = new Date().toUTCString();
+    },
+    url: function() {
+      var url = "<%= bin_url %>";
+      if ( this.timeRange ) { url = url + "?time=" + this.timeRange }
+      return url;
+    },
+    latestUrl: function() {
+      return "<%= bin_url %>" + "/?since=" + this.lastRequestTime;
+    },
+    comparator: function(link) { return -link.get('updated_at'); },
+    add: function(added, options) {
+      var self = this;
+      _.each(added, function(link) {
+        var existing = self.get(link.id);
+        if(existing){
+          existing.change();
+        } else {
+          Backbone.Collection.prototype.add.call(self, link, options);
+        }
+      });
+    },
+    getMore: function() {
+      var links = this;
+      $.ajax({
+        url: this.latestUrl(),
+        dataType: 'json',
+        success: function(data, statusText, xhr) {
+          if (data.length) {
+            links.add(data);
+            links.lastRequestTime = new Date().toUTCString();
+          }
+        },
+        error: function(error) { console.log(error) }
+      });
+    },
+    updateForTime: function(time) {
+      this.timeRange = time;
+      this.fetch({success: function() { console.log("New links!")}});
+    }
+  });
+
+  var LinkView = Backbone.View.extend({
+    tagName: "li",
+    events: {
+      "click .destroy": "delete"
+    },
+    initialize: function() {
+      _.bindAll(this, 'render','updated');
+      this.model.bind('change', this.updated);
+      this.template = $("#link-template").html();
+    },
+
+    render: function() {
+      $(this.el).html(Mustache.to_html(this.template, this.model.toJSON()));
+      return this;
+    },
+
+    updated: function() {
+      var self = this.el;
+      $(this.el).fadeOut(1000, function() {
+        $('#bin_links').find('.links').prepend(self);
+        $(self).fadeIn(1000);
+      });
+    },
+
+    delete: function() {
+      var self = this;
+      this.model.destroy({
+        success: function() {
+          $(self.el).fadeOut(1000, function() { self.remove() });
+        },
+        error: function() {
+          console.log("Unable to delete at this time");
+        }
+      })
+      return false;
+    },
+  });
+
+  var BinLinksView = Backbone.View.extend({
+    el: $('#bin_links'),
+
+    events: { },
+
+    initialize: function() {
+      _.bindAll(this, 'addLink', 'addAll');
+
+      Links.bind('add', this.addLink);
+      Links.bind('refresh', this.addAll);
+
+      Links.refresh(<%=raw links.to_json %>);
+    },
+
+    addLinkPlain: function(link) {
+      var view = new LinkView({model: link});
+      var renderedView = view.render().el;
+      $('.links').prepend(renderedView);
+      return renderedView;
+    },
+
+    addLink: function(link) {
+      $(this.addLinkPlain(link)).hide().fadeIn(1000);
+    },
+
+    addAll: function() {
+      $(this.el).find('.links').empty();
+      if(Links.length == 0){
+        $('.links').html("<p>No links have been added recently!</p>");
+      } else {
+        Links.each(this.addLinkPlain);
+      }
+    }
+  });
+
+  var BinController = Backbone.Controller.extend({
+
+    routes: {
+      "links/:time": "updateForTime"
+    },
+
+    updateForTime: function(time) {
+      Links.updateForTime(time);
+      $('#time_frame_selection').find('a').removeClass('current_view');
+      $('#time_frame_selection').find('.'+time).addClass('current_view');
+
+    }
+  });
+
+
+  window.Links = new BinLinks;
+  window.App = new BinLinksView;
+  window.Controller = new BinController;
+  Backbone.history.start();
+  setInterval( 'Links.getMore()', 30000);
+});

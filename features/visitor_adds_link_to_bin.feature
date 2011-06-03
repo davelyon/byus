@@ -1,3 +1,4 @@
+@javascript
 Feature: Visitor adds link to bin
 
   In order to more easilly share links

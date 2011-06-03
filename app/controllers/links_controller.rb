@@ -9,7 +9,13 @@ class LinksController < ApplicationController
       bin.links.build
     end
   end
-  expose(:links) { bin.links.from_hours_ago(params[:time]) }
+  expose(:links) do
+    if params[:time]
+      bin.links.from_hours_ago(params[:time])
+    else
+      bin.links.since(params[:since])
+    end
+  end
   expose(:latest_links) { Link.nonprivate.latest }
 
   def index
@@ -20,6 +26,7 @@ class LinksController < ApplicationController
       respond_to do |wants|
         wants.html
         wants.xml { render action: 'index', layout: false }
+        wants.json { render json: links }
       end
     end
   end
@@ -50,9 +57,15 @@ class LinksController < ApplicationController
   end
 
   def destroy
-    bin.links.find(params[:id]).destroy
-    flash[:success] = "Link deleted"
-    redirect_to bin_links_path(bin)
+    link = bin.links.find(params[:id])
+    link.destroy
+    respond_to do |wants|
+      wants.html do
+        flash[:success] = "Link deleted"
+        redirect_to bin_links_path(bin)
+      end
+      wants.json { render json: link }
+    end
   end
 
   def bookmarklet

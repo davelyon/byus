@@ -74,6 +74,13 @@ GEM
     fssm (0.2.7)
     gherkin (2.4.0)
       json (>= 1.4.6)
+    guard (0.4.2)
+      thor (~> 0.14.6)
+    guard-cucumber (0.5.0)
+      cucumber (>= 0.10)
+      guard (>= 0.4.0)
+    guard-rspec (0.4.0)
+      guard (>= 0.4.0)
     haml (3.1.1)
     haml-rails (0.3.4)
       actionpack (~> 3.0)
@@ -156,7 +163,6 @@ GEM
     treetop (1.4.9)
       polyglot (>= 0.3.1)
     tzinfo (0.3.27)
-    watchr (0.7)
     xpath (0.1.4)
       nokogiri (~> 1.3)
 
@@ -173,6 +179,9 @@ DEPENDENCIES
   dynamic_form
   fabrication
   faker
+  guard
+  guard-cucumber
+  guard-rspec
   haml-rails
   html5-boilerplate
   launchy
@@ -184,4 +193,3 @@ DEPENDENCIES
   ruby-debug19
   shoulda
   sqlite3
-  watchr

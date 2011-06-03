@@ -1,3 +1,4 @@
+@javascript
 Feature: Visitor adds duplicate link to bin
 
   In order to more easily view my links

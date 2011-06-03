@@ -21,6 +21,8 @@ group :development, :test do
   gem 'rspec-rails', '~> 2.6.1'
   gem 'ruby-debug19', :require => 'ruby-debug'
   gem 'shoulda'
-  gem 'watchr'
+  gem 'guard'
+  gem 'guard-rspec'
+  gem 'guard-cucumber'
   gem 'sqlite3'
 end

@@ -12,7 +12,7 @@ module HtmlSelectorsHelpers
       "html > body"
 
     when /the second link/
-      [:css, ".links li:nth-child(2)"]
+      [:css, "#bin_links > .links li:nth-child(2)"]
 
     when /bin public status/
       ".public"
