@@ -1,9 +1,10 @@
+<% bin_url =  bin_links_path(bin.secret_hash) %>
 $(document).ready( function() {
   var Link = Backbone.Model.extend({
     initialize: function() {},
     title: function() {return this.get("title")},
     location: function() {return this.attributes.location},
-    url: function() { return "<%= bin_links_path(bin.secret_hash) %>/" + this.id},
+    url: function() { return "<%= bin_url %>/" + this.id},
     afterDestroy: function(model, response) {
       $(model.view.el).slideUp(1000, function(){ $(this).remove() });
     }
@@ -14,13 +15,25 @@ $(document).ready( function() {
     initialize: function() {
       this.lastRequestTime = new Date().toUTCString();
     },
-    url: function() { return "<% bin_links_path(bin.secret_hash) %>"},
+    url: function() { 
+      var url = "<%= bin_url %>";
+      if ( this.timeRange ) {
+        url = url + "?time=" + this.timeRange
+      }
+      return url;
+    },
     latestUrl: function() {
-      return "<%= bin_links_path(bin.secret_hash) %>" +
+      return "<%= bin_url %>" +
         "/?since=" + this.lastRequestTime;
     },
     comparator: function(link) {
       return -link.get('updated_at');
+    },
+    add: function(models, options) {
+      var linksToAdd = _.reject(models, function(link) {
+        return Links.get(link.id);
+      });
+      Backbone.Collection.prototype.add.call(this, linksToAdd, options);
     },
     getMore: function() {
       var links = this;
@@ -28,13 +41,17 @@ $(document).ready( function() {
         url: this.latestUrl(),
         dataType: 'json',
         success: function(data, statusText, xhr) {
-          links.add(data)
           if (data.length) {
+            links.add(data);
             links.lastRequestTime = new Date().toUTCString();
           }
         },
-        error: function(error) {console.log(error) }
+        error: function(error) { console.log(error) }
       });
+    },
+    updateForTime: function(time) {
+      this.timeRange = time;
+      this.fetch({success: function() { console.log("New links!")}});
     }
   });
 
@@ -51,7 +68,6 @@ $(document).ready( function() {
     render: function() {
       var linkHtml = $(this.el).html(Mustache.to_html(this.template, this.model.toJSON()));
       var model = this.model;
-      console.log(model);
       linkHtml.find('.destroy').click(function() {
         model.destroy({
           success: model.afterDestroy,
@@ -80,6 +96,7 @@ $(document).ready( function() {
     addLinkPlain: function(link) {
       var view = new LinkView({model: link});
       var renderedView = view.render().el;
+      $(renderedView).remove();
       $('.links').prepend(renderedView);
       return renderedView;
     },
@@ -89,11 +106,24 @@ $(document).ready( function() {
     },
 
     addAll: function() {
+      $(this.el).find('.links').empty();
       Links.each(this.addLinkPlain);
     }
   });
 
+  var BinController = Backbone.Controller.extend({
+
+    routes: {
+      "links/:time": "updateForTime"
+    },
+
+    updateForTime: function(time) { Links.updateForTime(time) }
+  });
+
+
   window.Links = new BinLinks;
   window.App = new BinLinksView;
+  window.Controller = new BinController;
+  Backbone.history.start();
   setInterval( 'Links.getMore()', 5000);
 });

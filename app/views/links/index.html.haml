@@ -72,9 +72,9 @@
 #bin_links
   #time_frame_selection
     Show links from the last:
-    = link_to "24h"
-    = link_to "48h"
-    = link_to "1w"
+    = link_to "24h", "#links/24"
+    = link_to "48h", "#links/48"
+    = link_to "1w", "#links/168"
   %ul.links
 %script#link-template{type: "text/template"}
   %a{href: "{{ location }}" }
