@@ -13,12 +13,12 @@
 ActiveRecord::Schema.define(:version => 20110601183044) do
 
   create_table "bins", :force => true do |t|
-    t.string    "title"
-    t.timestamp "created_at"
-    t.timestamp "updated_at"
-    t.string    "secret_hash"
-    t.string    "public_hash"
-    t.boolean   "allow_public", :default => true
+    t.string   "title"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "secret_hash"
+    t.string   "public_hash"
+    t.boolean  "allow_public", :default => true
   end
 
   add_index "bins", ["public_hash"], :name => "index_bins_on_public_hash"
@@ -32,12 +32,12 @@ ActiveRecord::Schema.define(:version => 20110601183044) do
   end
 
   create_table "links", :force => true do |t|
-    t.string    "location"
-    t.integer   "bin_id"
-    t.timestamp "created_at"
-    t.timestamp "updated_at"
-    t.string    "title"
-    t.integer   "domain_id"
+    t.string   "location"
+    t.integer  "bin_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "title"
+    t.integer  "domain_id"
   end
 
 end
