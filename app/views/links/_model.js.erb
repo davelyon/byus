@@ -1,48 +1,69 @@
 $(document).ready( function() {
-  window.Link = Backbone.Model.extend({
+  var Link = Backbone.Model.extend({
     initialize: function() {},
     title: function() {return this.get("title")},
-    location: function() {return this.attributes.location}
-  });
-
-  window.BinLinks = Backbone.Collection.extend({
-    model: Link,
-    url: function() {
-      return "<%= bin_links_path(bin.secret_hash) %>" +
-        "/?since=" + this.first().get('created_at');
-    },
-    getMore: function() {
-      var response = $.ajax({
-        url: this.url(),
-        dataType: 'json',
-        async: false
-      }).responseText;
-      this.add(jQuery.parseJSON(response));
+    location: function() {return this.attributes.location},
+    url: function() { return "<%= bin_links_path(bin.secret_hash) %>/" + this.id},
+    afterDestroy: function(model, response) {
+      $(model.view.el).slideUp(1000, function(){ $(this).remove() });
     }
   });
 
-  window.LinkView = Backbone.View.extend({
+  var BinLinks = Backbone.Collection.extend({
+    model: Link,
+    initialize: function() {
+      this.lastRequestTime = new Date().toUTCString();
+    },
+    url: function() { return "<% bin_links_path(bin.secret_hash) %>"},
+    latestUrl: function() {
+      return "<%= bin_links_path(bin.secret_hash) %>" +
+        "/?since=" + this.lastRequestTime;
+    },
+    comparator: function(link) {
+      return -link.get('updated_at');
+    },
+    getMore: function() {
+      var links = this;
+      $.ajax({
+        url: this.latestUrl(),
+        dataType: 'json',
+        success: function(data, statusText, xhr) {
+          links.add(data)
+          if (data.length) {
+            links.lastRequestTime = new Date().toUTCString();
+          }
+        },
+        error: function(error) {console.log(error) }
+      });
+    }
+  });
 
+  var LinkView = Backbone.View.extend({
     tagName: "li",
-
-    template: _.template($('#link-template').html()),
-
     events: {},
-
     initialize: function() {
       _.bindAll(this, 'render');
       this.model.bind('change', this.render);
       this.model.view = this;
+      this.template = $("#link-template").html();
     },
 
     render: function() {
-      $(this.el).html(this.template(this.model.toJSON()));
-      return this;
-    },
+      var linkHtml = $(this.el).html(Mustache.to_html(this.template, this.model.toJSON()));
+      var model = this.model;
+      console.log(model);
+      linkHtml.find('.destroy').click(function() {
+        model.destroy({
+          success: model.afterDestroy,
+          error: function() { console.log("Oops") }
+        });
+      });
 
+      return this;
+    }
   });
 
-  window.BinLinksView = Backbone.View.extend({
+  var BinLinksView = Backbone.View.extend({
     el: $('#bin_links'),
 
     events: {},
@@ -59,7 +80,7 @@ $(document).ready( function() {
     addLinkPlain: function(link) {
       var view = new LinkView({model: link});
       var renderedView = view.render().el;
-      $('.links').append(renderedView);
+      $('.links').prepend(renderedView);
       return renderedView;
     },
 
@@ -68,12 +89,11 @@ $(document).ready( function() {
     },
 
     addAll: function() {
-      console.log('Rendering all');
       Links.each(this.addLinkPlain);
     }
   });
 
   window.Links = new BinLinks;
   window.App = new BinLinksView;
-  setInterval( 'Links.getMore()', 2000);
+  setInterval( 'Links.getMore()', 5000);
 });

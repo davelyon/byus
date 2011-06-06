@@ -16,6 +16,11 @@ class Link < ActiveRecord::Base
   scope :nonprivate, joins(:bin).where(bins: {allow_public: true})
   scope :latest, order("#{table_name}.created_at DESC").limit(30)
 
+  def self.since(time)
+    parsedTime = time ? Time.zone.parse(time).to_s(:db) : 24.hours.ago
+    where("updated_at > ?", parsedTime).order('updated_at DESC')
+  end
+
   def secret_hash
     bin.secret_hash
   end
