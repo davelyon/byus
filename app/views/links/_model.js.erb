@@ -129,24 +129,57 @@ $(document).ready( function() {
     }
   });
 
+  var BinHelpView = Backbone.View.extend({
+    el: $('#bin_controls'),
+
+    events: {
+      "click #info_secret"      : "showSecret",
+      "click #info_public"      : "showPublic",
+      "click #info_bookmarklet" : "showBookmarklet",
+      "click .close"            : "closeHelp"
+    },
+
+    hideAll: function() { $('.help').hide() },
+
+    showSecret: function() {
+      this.hideAll();
+      $("#private_help").toggle();
+    },
+
+    showPublic: function() {
+      this.hideAll();
+      $("#public_help").toggle();
+    },
+
+    showBookmarklet: function() {
+      this.hideAll();
+      $("#bookmarklet_help").toggle();
+    },
+
+    closeHelp: function() {
+      this.hideAll();
+    }
+  });
+
   var BinController = Backbone.Controller.extend({
 
     routes: {
-      "links/:time": "updateForTime"
+      "links/:time" : "updateForTime"
     },
 
     updateForTime: function(time) {
       Links.updateForTime(time);
       $('#time_frame_selection').find('a').removeClass('current_view');
       $('#time_frame_selection').find('.'+time).addClass('current_view');
-
     }
+
   });
 
 
   window.Links = new BinLinks;
   window.App = new BinLinksView;
   window.Controller = new BinController;
+  window.HelpView = new BinHelpView;
   Backbone.history.start();
   setInterval( 'Links.getMore()', 30000);
 });

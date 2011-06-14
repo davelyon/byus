@@ -32,35 +32,7 @@
       - else
         %li= link_to "Make this bin public",bin_path(bin, bin: { allow_public:true } ), method: :put
       %li= link_to "RSS Feed", bin_links_path(bin, format: 'xml')
-  #bin_explanation
-    .help#base_help
-      = link_to "", 'javascript:$(".help").slideUp(1500);'
-      %h3 What is a bin?
-      %p
-        %em A bin
-        is a place to put links that you want to share with others.
-        You may share either a public or private link to this bin that will allow others to see these links.
-    .help#private_help{style: 'display: none'}
-      = link_to "", 'javascript:$(".help").slideUp(1500);'
-      %h3 What is a private link?
-      %p
-        The
-        %em private link
-        allows changes to be made by anyone at any time, so share it wiseley.
-    .help#public_help{style: 'display: none'}
-      = link_to "", 'javascript:$(".help").slideUp(1500);'
-      %h3 What is a public link?
-      %p
-        The
-        %em public link
-        will allow people to see links that have been shared, but not make any changes or add any links.  You can share this with anyone safely.
-    .help#bookmarklet_help{style: 'display: none'}
-      = link_to "", 'javascript:$(".help").slideUp(1500);'
-      %h3 What is a bookmarklet?
-      %p
-        The
-        %em bookmarklet
-        is a quick-save button for your bin.  Drag the bookmarklet to your bookmark bar in your browser, and you can click it from any page to have that page added to your bin.  You'll see a notification in the top left corner of the current page to indicate that it was saved.
+  = render :partial => 'bin_help'
 .new_link_form
   = form_for [bin,link] do |f|
     #link_fields
@@ -68,7 +40,6 @@
       = f.url_field :location, {placeholder: "Enter a URL", class: 'link_location'}
       = f.submit "Add", {class: 'link_submit'}
 = error_messages_for link, id: 'link_errors'
-
 #bin_links
   #time_frame_selection
     Show links from the last:
@@ -80,20 +51,6 @@
   %a{href: "{{ location }}" }
     {{ title }}
   %a{href: '#', class: 'destroy'} Delete
-
 - content_for :javascripts do
-  :javascript
-    $("#info_public").click(function() {
-      $(".help").hide();
-      $("#public_help").show();
-    });
-    $("#info_secret").click(function() {
-      $(".help").hide();
-      $("#private_help").show();
-    });
-    $("#info_bookmarklet").click(function() {
-      $(".help").hide();
-      $("#bookmarklet_help").show();
-    });
   %script
     = render 'model.js'
