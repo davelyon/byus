@@ -1,6 +1,7 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.1.0.rc4'
+gem 'rails', git: 'https://github.com/rails/rails', branch: '3-1-stable'
+gem 'sprockets', git: 'https://github.com/sstephenson/sprockets.git'
 gem 'pg'
 gem 'decent_exposure'
 gem 'haml'
@@ -24,6 +25,7 @@ group :development, :test do
   gem 'cucumber'
   gem 'cucumber-rails'
   gem 'database_cleaner'
+  gem 'evergreen', require: 'evergreen/rails'
   gem 'fabrication'
   gem 'faker'
   gem 'launchy'
