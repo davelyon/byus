@@ -75,7 +75,7 @@ describe Link do
       end
     end
     context "created without title" do
-      subject { bin.links.build( link[:title] = "" ) }
+      subject { bin.links.build( link[:title] = nil ) }
       it "assigns the location as the title" do
         subject.title.should == subject.location
       end

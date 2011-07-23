@@ -44,5 +44,7 @@ module Byus
         g.test_framework      :rspec, :fixture => true
         g.fixture_replacement :fabrication
     end
+
+    config.assets.enabled = true
   end
 end
